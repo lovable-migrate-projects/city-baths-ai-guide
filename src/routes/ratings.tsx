@@ -99,7 +99,7 @@ function RatingsPage() {
 
       <Table>
         {ranked.map((c, i) => (
-          <Row key={c.id} to="/companies/$id" params={{ id: c.id }}>
+          <Row key={c.id} to={"/companies/$id" as string} params={{ id: c.id } as never}>
             <Rank $top={i < 3}>
               {i < 3 ? <Trophy size={18} /> : i + 1}
             </Rank>
