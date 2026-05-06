@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "@tanstack/react-router";
 
 const Wrap = styled.footer`
   margin-top: 80px;
@@ -54,25 +55,24 @@ export function Footer() {
         <Col>
           <h4>Навигация</h4>
           <ul>
-            <li><a href="/">Каталог</a></li>
-            <li><a href="/map/">Карта</a></li>
-            <li><a href="/ratings/">Рейтинги</a></li>
-            <li><a href="/bani-otzivy/">Отзывы</a></li>
+            <li><Link to="/">Каталог</Link></li>
+            <li><Link to="/map">Карта</Link></li>
+            <li><Link to="/ratings">Рейтинги</Link></li>
+            <li><Link to="/bani-otzivy">Отзывы</Link></li>
           </ul>
         </Col>
         <Col>
           <h4>Владельцам</h4>
           <ul>
-            <li><a href="/companies/create">Разместить заведение</a></li>
-            <li><a href="/about/">Тарифы</a></li>
+            <li><Link to="/companies/create">Разместить заведение</Link></li>
+            <li><Link to="/about">Тарифы</Link></li>
           </ul>
         </Col>
         <Col>
           <h4>Информация</h4>
           <ul>
-            <li><a href="/about/">О проекте</a></li>
-            <li><a href="/contacts.html">Контакты</a></li>
-            <li><a href="/tag/">Все теги</a></li>
+            <li><Link to="/about">О проекте</Link></li>
+            <li><Link to="/about">Контакты</Link></li>
           </ul>
         </Col>
       </Inner>
