@@ -11,7 +11,7 @@ import { ClientOnly } from "../components/ClientOnly";
 import { CompaniesMap } from "../components/map/CompaniesMap";
 import { companies as ALL } from "../data/companies";
 import type { ChatMessage } from "../types";
-import { List, MapIcon } from "lucide-react";
+import { List as ListIcon, MapIcon } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -106,7 +106,7 @@ const Layout = styled.div<{ $view: "list" | "map" }>`
   }
 `;
 
-const List = styled.div`
+const ListGrid = styled.div`
   display: grid;
   gap: 14px;
 `;
@@ -182,16 +182,19 @@ function Home() {
           <h2>Все заведения <small>{list.length} в каталоге</small></h2>
           <Toggle role="tablist">
             <ToggleBtn $active={view === "list"} onClick={() => setView("list")}>
-              <List size={14} /> Список
+              <ListIcon size={14} /> Список
             </ToggleBtn>
             <ToggleBtn $active={view === "map"} onClick={() => setView("map")}>
+              <MapIcon size={14} /> Карта
+            </ToggleBtn>
+          </Toggle>
               <MapIcon size={14} /> Карта
             </ToggleBtn>
           </Toggle>
         </Toolbar>
 
         <Layout $view={view}>
-          <List className="list">
+          <ListGrid className="list">
             {list.map((c) => (
               <CompanyCard
                 key={c.id}
@@ -200,7 +203,7 @@ function Home() {
                 onHover={setHovered}
               />
             ))}
-          </List>
+          </ListGrid>
           <div className="map">
             <ClientOnly fallback={<div style={{ minHeight: 480 }} />}>
               <CompaniesMap companies={list} highlightedId={hovered} />
