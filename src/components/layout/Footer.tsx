@@ -23,17 +23,30 @@ const Col = styled.div`
   h4 {
     font-size: 14px;
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: 0.06em;
     color: ${({ theme }) => theme.colors.muted};
     margin-bottom: 12px;
   }
-  ul li { margin-bottom: 8px; }
-  a { color: ${({ theme }) => theme.colors.textSoft}; font-size: 14px; }
+  ul li {
+    margin-bottom: 8px;
+  }
+  a {
+    color: ${({ theme }) => theme.colors.textSoft};
+    font-size: 14px;
+  }
 `;
 
 const About = styled.div`
-  p { color: ${({ theme }) => theme.colors.muted}; font-size: 14px; max-width: 360px; }
-  strong { font-family: ${({ theme }) => theme.fonts.heading}; font-size: 18px; color: ${({ theme }) => theme.colors.text}; }
+  p {
+    color: ${({ theme }) => theme.colors.muted};
+    font-size: 14px;
+    max-width: 360px;
+  }
+  strong {
+    font-family: ${({ theme }) => theme.fonts.heading};
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 const Bottom = styled.div`
@@ -50,29 +63,48 @@ export function Footer() {
       <Inner>
         <About>
           <strong>Городские бани</strong>
-          <p>Каталог общественных бань и саун с 2012 года. Помогаем находить места для отдыха и парения по всей России.</p>
+          <p>
+            Каталог общественных бань и саун с 2012 года. Помогаем находить места для отдыха и
+            парения по всей России.
+          </p>
         </About>
         <Col>
           <h4>Навигация</h4>
           <ul>
-            <li><Link to="/">Каталог</Link></li>
-            <li><Link to="/map">Карта</Link></li>
-            <li><Link to="/ratings">Рейтинги</Link></li>
-            <li><Link to="/bani-otzivy">Отзывы</Link></li>
+            <li>
+              <Link to="/">Каталог</Link>
+            </li>
+            <li>
+              <Link to="/map">Карта</Link>
+            </li>
+            <li>
+              <Link to="/ratings">Рейтинги</Link>
+            </li>
+            <li>
+              <Link to="/bani-otzivy">Отзывы</Link>
+            </li>
           </ul>
         </Col>
         <Col>
           <h4>Владельцам</h4>
           <ul>
-            <li><Link to="/companies/create">Разместить заведение</Link></li>
-            <li><Link to="/about">Тарифы</Link></li>
+            <li>
+              <Link to="/companies/create">Разместить заведение</Link>
+            </li>
+            <li>
+              <Link to="/about">Тарифы</Link>
+            </li>
           </ul>
         </Col>
         <Col>
           <h4>Информация</h4>
           <ul>
-            <li><Link to="/about">О проекте</Link></li>
-            <li><Link to="/about">Контакты</Link></li>
+            <li>
+              <Link to="/about">О проекте</Link>
+            </li>
+            <li>
+              <Link to="/about">Контакты</Link>
+            </li>
           </ul>
         </Col>
       </Inner>

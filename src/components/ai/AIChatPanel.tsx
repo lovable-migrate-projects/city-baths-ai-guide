@@ -25,12 +25,19 @@ const Card = styled.div<{ $compact?: boolean }>`
     inset: -1px;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.primaryGlow}, transparent 60%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.primary},
+      ${({ theme }) => theme.colors.primaryGlow},
+      transparent 60%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
-            mask-composite: exclude;
+    mask-composite: exclude;
     pointer-events: none;
-    opacity: .9;
+    opacity: 0.9;
   }
 `;
 
@@ -42,7 +49,9 @@ const Head = styled.div`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
-  svg { color: ${({ theme }) => theme.colors.primary}; }
+  svg {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 const Hint = styled.div`
@@ -59,7 +68,9 @@ const Messages = styled.div`
   gap: 10px;
   padding: 6px 2px;
   margin-bottom: 12px;
-  &:empty { display: none; }
+  &:empty {
+    display: none;
+  }
 `;
 
 const Bubble = styled.div<{ $role: "user" | "assistant" }>`
@@ -69,10 +80,20 @@ const Bubble = styled.div<{ $role: "user" | "assistant" }>`
   border-radius: ${({ theme }) => theme.radii.lg};
   font-size: 14.5px;
   line-height: 1.5;
-  background: ${({ $role, theme }) => ($role === "user" ? theme.colors.primary : theme.colors.accent)};
+  background: ${({ $role, theme }) =>
+    $role === "user" ? theme.colors.primary : theme.colors.accent};
   color: ${({ $role, theme }) => ($role === "user" ? "white" : theme.colors.text)};
-  p { margin: 0 0 .5em; &:last-child { margin: 0; } }
-  ul, ol { padding-left: 18px; margin: .25em 0; }
+  p {
+    margin: 0 0 0.5em;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  ul,
+  ol {
+    padding-left: 18px;
+    margin: 0.25em 0;
+  }
 `;
 
 const ResultsRow = styled.div`
@@ -80,7 +101,9 @@ const ResultsRow = styled.div`
   gap: 8px;
   margin-top: 8px;
   grid-template-columns: 1fr;
-  @media (min-width: ${({ theme }) => theme.bp.sm}) { grid-template-columns: 1fr 1fr; }
+  @media (min-width: ${({ theme }) => theme.bp.sm}) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const Result = styled.a`
@@ -92,10 +115,24 @@ const Result = styled.a`
   border: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
-  &:hover { border-color: ${({ theme }) => theme.colors.primary}; text-decoration: none; }
-  img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
-  strong { font-size: 14px; display: block; }
-  span { font-size: 12px; color: ${({ theme }) => theme.colors.muted}; }
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+  }
+  img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  strong {
+    font-size: 14px;
+    display: block;
+  }
+  span {
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.muted};
+  }
 `;
 
 const InputRow = styled.form`
@@ -114,7 +151,9 @@ const Input = styled.input`
   font-family: inherit;
   color: ${({ theme }) => theme.colors.text};
   outline: none;
-  transition: border-color .15s, background .15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary};
     background: white;
@@ -132,10 +171,19 @@ const SendBtn = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: background .15s, transform .05s;
-  &:hover { background: ${({ theme }) => theme.colors.primaryDark}; }
-  &:active { transform: translateY(1px); }
-  &:disabled { opacity: .6; cursor: not-allowed; }
+  transition:
+    background 0.15s,
+    transform 0.05s;
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;
 
 const Chips = styled.div`
@@ -152,7 +200,7 @@ const Chip = styled.button`
   padding: 7px 12px;
   border-radius: ${({ theme }) => theme.radii.pill};
   font-size: 13px;
-  transition: all .15s;
+  transition: all 0.15s;
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.primary};
@@ -173,12 +221,18 @@ const Typing = styled.div`
   background: ${({ theme }) => theme.colors.accent};
   border-radius: ${({ theme }) => theme.radii.lg};
   span {
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: ${({ theme }) => theme.colors.primary};
     animation: ${blink} 1.2s infinite;
   }
-  span:nth-child(2) { animation-delay: .15s; }
-  span:nth-child(3) { animation-delay: .3s; }
+  span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
 `;
 
 function ResultCards({ companies }: { companies: Company[] }) {
@@ -189,7 +243,9 @@ function ResultCards({ companies }: { companies: Company[] }) {
           <img src={c.image} alt={c.name} loading="lazy" />
           <div>
             <strong>{c.name}</strong>
-            <span>{c.city} • ★ {c.rating.toFixed(1)}</span>
+            <span>
+              {c.city} • ★ {c.rating.toFixed(1)}
+            </span>
           </div>
         </Result>
       ))}
@@ -197,13 +253,7 @@ function ResultCards({ companies }: { companies: Company[] }) {
   );
 }
 
-export function AIChatPanel({
-  messages,
-  isStreaming,
-  onSend,
-  suggestions = [],
-  compact,
-}: Props) {
+export function AIChatPanel({ messages, isStreaming, onSend, suggestions = [], compact }: Props) {
   const [text, setText] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -231,12 +281,16 @@ export function AIChatPanel({
         {messages.map((m) => (
           <Bubble key={m.id} $role={m.role}>
             <ReactMarkdown>{m.content}</ReactMarkdown>
-            {m.companies && m.companies.length > 0 && (
-              <ResultCards companies={m.companies} />
-            )}
+            {m.companies && m.companies.length > 0 && <ResultCards companies={m.companies} />}
           </Bubble>
         ))}
-        {isStreaming && <Typing><span /><span /><span /></Typing>}
+        {isStreaming && (
+          <Typing>
+            <span />
+            <span />
+            <span />
+          </Typing>
+        )}
       </Messages>
 
       <InputRow onSubmit={submit}>
@@ -254,7 +308,9 @@ export function AIChatPanel({
       {suggestions.length > 0 && (
         <Chips>
           {suggestions.map((s) => (
-            <Chip key={s} type="button" onClick={() => onSend(s)}>{s}</Chip>
+            <Chip key={s} type="button" onClick={() => onSend(s)}>
+              {s}
+            </Chip>
           ))}
         </Chips>
       )}

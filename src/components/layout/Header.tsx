@@ -31,14 +31,20 @@ const Brand = styled(Link)`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: 800;
   font-size: 18px;
-  &:hover { text-decoration: none; }
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const Logo = styled.span`
   width: 36px;
   height: 36px;
   border-radius: ${({ theme }) => theme.radii.md};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.primaryGlow});
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.primary},
+    ${({ theme }) => theme.colors.primaryGlow}
+  );
   color: white;
   display: grid;
   place-items: center;
@@ -55,7 +61,10 @@ const Nav = styled.nav`
     color: ${({ theme }) => theme.colors.textSoft};
     font-weight: 500;
     font-size: 15px;
-    &:hover { color: ${({ theme }) => theme.colors.primary}; text-decoration: none; }
+    &:hover {
+      color: ${({ theme }) => theme.colors.primary};
+      text-decoration: none;
+    }
   }
 `;
 
@@ -73,7 +82,10 @@ const CTA = styled(Link)`
   border-radius: ${({ theme }) => theme.radii.pill};
   font-weight: 600;
   font-size: 14px;
-  &:hover { background: ${({ theme }) => theme.colors.primaryDark}; text-decoration: none; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     display: inline-flex;
   }
@@ -91,7 +103,9 @@ const Burger = styled.button`
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   transition: background 0.15s ease;
-  &:hover { background: ${({ theme }) => theme.colors.accent}; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.accent};
+  }
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.primary};
     outline-offset: 2px;
@@ -161,13 +175,18 @@ const linkBase = css`
   font-size: 16px;
   border-radius: ${({ theme }) => theme.radii.md};
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
   &:hover {
     background: ${({ theme }) => theme.colors.accent};
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
   }
-  svg { color: ${({ theme }) => theme.colors.primary}; flex-shrink: 0; }
+  svg {
+    color: ${({ theme }) => theme.colors.primary};
+    flex-shrink: 0;
+  }
 `;
 
 const NavList = styled.nav`
@@ -178,7 +197,9 @@ const NavList = styled.nav`
   flex: 1;
   overflow-y: auto;
 
-  a { ${linkBase} }
+  a {
+    ${linkBase}
+  }
 `;
 
 const DrawerFoot = styled.div`
@@ -200,7 +221,10 @@ const DrawerCTA = styled(Link)`
   border-radius: ${({ theme }) => theme.radii.pill};
   font-weight: 600;
   font-size: 15px;
-  &:hover { background: ${({ theme }) => theme.colors.primaryDark}; text-decoration: none; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
 `;
 
 const Hint = styled.p`
@@ -220,7 +244,10 @@ const IconBtn = styled.button`
   place-items: center;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.textSoft};
-  &:hover { background: ${({ theme }) => theme.colors.surface}; color: ${({ theme }) => theme.colors.text}; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.surface};
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 const NAV_ITEMS = [
@@ -238,7 +265,9 @@ export function Header() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
@@ -251,7 +280,9 @@ export function Header() {
       <Bar>
         <Inner>
           <Brand to="/">
-            <Logo><Flame size={20} /></Logo>
+            <Logo>
+              <Flame size={20} />
+            </Logo>
             Городские бани
           </Brand>
           <Nav>
@@ -287,7 +318,9 @@ export function Header() {
       >
         <DrawerHead>
           <DrawerTitle>
-            <Logo><Flame size={18} /></Logo>
+            <Logo>
+              <Flame size={18} />
+            </Logo>
             Меню
           </DrawerTitle>
           <IconBtn type="button" aria-label="Закрыть меню" onClick={() => setOpen(false)}>

@@ -17,7 +17,11 @@ const Fab = styled.button`
   bottom: 20px;
   z-index: 60;
   border: 0;
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary}, ${({ theme }) => theme.colors.primaryGlow});
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.primary},
+    ${({ theme }) => theme.colors.primaryGlow}
+  );
   color: white;
   padding: 14px 18px;
   border-radius: ${({ theme }) => theme.radii.pill};
@@ -26,17 +30,24 @@ const Fab = styled.button`
   align-items: center;
   gap: 8px;
   box-shadow: ${({ theme }) => theme.shadows.glow};
-  transition: transform .12s;
-  &:hover { transform: translateY(-2px); }
+  transition: transform 0.12s;
+  &:hover {
+    transform: translateY(-2px);
+  }
 `;
 
 const Backdrop = styled.div`
-  position: fixed; inset: 0; z-index: 70;
-  background: rgba(15, 23, 42, .4);
-  display: flex; align-items: flex-end; justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(15, 23, 42, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   padding: 0;
   @media (min-width: ${({ theme }) => theme.bp.md}) {
-    align-items: center; padding: 20px;
+    align-items: center;
+    padding: 20px;
   }
 `;
 
@@ -56,14 +67,19 @@ const Panel = styled.div`
 
 const Close = styled.button`
   position: absolute;
-  top: 12px; right: 12px;
+  top: 12px;
+  right: 12px;
   border: 0;
   background: ${({ theme }) => theme.colors.surface};
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   color: ${({ theme }) => theme.colors.text};
-  &:hover { background: ${({ theme }) => theme.colors.surfaceAlt}; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.surfaceAlt};
+  }
 `;
 
 export function AIChatFloating(props: Props) {
@@ -76,7 +92,9 @@ export function AIChatFloating(props: Props) {
       {open && (
         <Backdrop onClick={() => setOpen(false)}>
           <Panel onClick={(e) => e.stopPropagation()}>
-            <Close onClick={() => setOpen(false)} aria-label="Закрыть"><X size={18} /></Close>
+            <Close onClick={() => setOpen(false)} aria-label="Закрыть">
+              <X size={18} />
+            </Close>
             <AIChatPanel {...props} compact />
           </Panel>
         </Backdrop>

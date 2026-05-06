@@ -11,6 +11,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
 import { GlobalStyle } from "../styles/global";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -76,9 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Городские бани — каталог бань и саун с ИИ-поиском" },
-      { name: "description", content: "Каталог общественных бань и саун с 2012 года. Интерактивная карта, отзывы и ИИ-помощник для подбора заведения." },
+      {
+        name: "description",
+        content:
+          "Каталог общественных бань и саун с 2012 года. Интерактивная карта, отзывы и ИИ-помощник для подбора заведения.",
+      },
       { property: "og:title", content: "Городские бани — каталог бань и саун" },
-      { property: "og:description", content: "Найдите баню или сауну с помощью карты и ИИ-поиска." },
+      {
+        property: "og:description",
+        content: "Найдите баню или сауну с помощью карты и ИИ-поиска.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -86,7 +95,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,

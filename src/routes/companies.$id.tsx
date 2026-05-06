@@ -14,14 +14,22 @@ export const Route = createFileRoute("/companies/$id")({
     return { company };
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.company.name} — отзывы, фото, цены` },
-      { name: "description", content: `${loaderData.company.name} в городе ${loaderData.company.city}. Адрес: ${loaderData.company.address}. Рейтинг ${loaderData.company.rating.toFixed(1)} на основе ${loaderData.company.reviewsCount} отзывов.` },
-    ] : [],
+    meta: loaderData
+      ? [
+          { title: `${loaderData.company.name} — отзывы, фото, цены` },
+          {
+            name: "description",
+            content: `${loaderData.company.name} в городе ${loaderData.company.city}. Адрес: ${loaderData.company.address}. Рейтинг ${loaderData.company.rating.toFixed(1)} на основе ${loaderData.company.reviewsCount} отзывов.`,
+          },
+        ]
+      : [],
   }),
   component: CompanyPage,
   notFoundComponent: () => (
-    <PageShell title="Заведение не найдено" subtitle="Возможно, оно было удалено или адрес ошибочен.">
+    <PageShell
+      title="Заведение не найдено"
+      subtitle="Возможно, оно было удалено или адрес ошибочен."
+    >
       <Link to="/">← Вернуться в каталог</Link>
     </PageShell>
   ),
@@ -33,8 +41,12 @@ export const Route = createFileRoute("/companies/$id")({
 });
 
 const Back = styled(Link)`
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 14px; font-weight: 600; margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
 `;
 
 const Hero = styled.div`
@@ -60,27 +72,53 @@ const Info = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 24px;
-  display: flex; flex-direction: column; gap: 12px;
-  h1 { font-size: 26px; margin: 0; }
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  h1 {
+    font-size: 26px;
+    margin: 0;
+  }
 `;
 
 const RatingBig = styled.div`
-  display: inline-flex; align-items: baseline; gap: 6px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
   font-family: ${({ theme }) => theme.fonts.heading};
-  strong { font-size: 32px; font-weight: 800; }
-  svg { color: ${({ theme }) => theme.colors.star }; fill: ${({ theme }) => theme.colors.star}; align-self: center; }
-  span { color: ${({ theme }) => theme.colors.muted}; font-size: 14px; font-weight: 400; font-family: ${({ theme }) => theme.fonts.body}; }
+  strong {
+    font-size: 32px;
+    font-weight: 800;
+  }
+  svg {
+    color: ${({ theme }) => theme.colors.star};
+    fill: ${({ theme }) => theme.colors.star};
+    align-self: center;
+  }
+  span {
+    color: ${({ theme }) => theme.colors.muted};
+    font-size: 14px;
+    font-weight: 400;
+    font-family: ${({ theme }) => theme.fonts.body};
+  }
 `;
 
 const InfoRow = styled.div`
-  display: flex; align-items: center; gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: ${({ theme }) => theme.colors.textSoft};
   font-size: 14.5px;
-  svg { color: ${({ theme }) => theme.colors.primary}; flex-shrink: 0; }
+  svg {
+    color: ${({ theme }) => theme.colors.primary};
+    flex-shrink: 0;
+  }
 `;
 
 const Tags = styled.div`
-  display: flex; flex-wrap: wrap; gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `;
 
 const Tag = styled.span`
@@ -99,17 +137,26 @@ const Btn = styled.a`
   border-radius: ${({ theme }) => theme.radii.pill};
   font-weight: 600;
   text-align: center;
-  &:hover { background: ${({ theme }) => theme.colors.primaryDark}; text-decoration: none; }
+  &:hover {
+    background: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
 `;
 
 const Section = styled.section`
   margin-bottom: 28px;
-  h2 { font-size: 22px; margin-bottom: 14px; }
+  h2 {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
 `;
 
 const MapWrap = styled.div`
   height: 360px;
-  .leaflet-container { height: 100% !important; min-height: 360px; }
+  .leaflet-container {
+    height: 100% !important;
+    min-height: 360px;
+  }
 `;
 
 const ReviewCard = styled.article`
@@ -118,16 +165,42 @@ const ReviewCard = styled.article`
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 18px;
   margin-bottom: 12px;
-  display: flex; flex-direction: column; gap: 8px;
-  .head { display: flex; justify-content: space-between; gap: 10px; }
-  .who { font-weight: 600; }
-  .meta { font-size: 12.5px; color: ${({ theme }) => theme.colors.muted}; display: flex; align-items: center; gap: 4px; }
-  .stars { display: inline-flex; gap: 2px; color: ${({ theme }) => theme.colors.star}; }
-  p { margin: 0; color: ${({ theme }) => theme.colors.textSoft}; font-size: 14.5px; }
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .who {
+    font-weight: 600;
+  }
+  .meta {
+    font-size: 12.5px;
+    color: ${({ theme }) => theme.colors.muted};
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .stars {
+    display: inline-flex;
+    gap: 2px;
+    color: ${({ theme }) => theme.colors.star};
+  }
+  p {
+    margin: 0;
+    color: ${({ theme }) => theme.colors.textSoft};
+    font-size: 14.5px;
+  }
 `;
 
 function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(iso).toLocaleDateString("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 function CompanyPage() {
@@ -136,7 +209,9 @@ function CompanyPage() {
 
   return (
     <PageShell title={company.name} subtitle={`${company.city}, ${company.address}`}>
-      <Back to="/"><ChevronLeft size={16} /> К каталогу</Back>
+      <Back to="/">
+        <ChevronLeft size={16} /> К каталогу
+      </Back>
 
       <Hero>
         <Cover $src={company.image} role="img" aria-label={company.name} />
@@ -147,15 +222,30 @@ function CompanyPage() {
             <strong>{company.rating.toFixed(1)}</strong>
             <span>({company.reviewsCount} отзывов)</span>
           </RatingBig>
-          <InfoRow><MapPin size={16} /> {company.address}</InfoRow>
-          <InfoRow><Clock size={16} /> {company.hours} · {company.isOpenNow ? "сейчас открыто" : "сейчас закрыто"}</InfoRow>
-          <InfoRow><Phone size={16} /> +7 (495) 000-00-00</InfoRow>
-          <InfoRow><Globe size={16} /> gorodskie-bani.ru</InfoRow>
+          <InfoRow>
+            <MapPin size={16} /> {company.address}
+          </InfoRow>
+          <InfoRow>
+            <Clock size={16} /> {company.hours} ·{" "}
+            {company.isOpenNow ? "сейчас открыто" : "сейчас закрыто"}
+          </InfoRow>
+          <InfoRow>
+            <Phone size={16} /> +7 (495) 000-00-00
+          </InfoRow>
+          <InfoRow>
+            <Globe size={16} /> gorodskie-bani.ru
+          </InfoRow>
           {company.priceFrom && (
-            <InfoRow><strong style={{ color: "inherit", fontSize: 18 }}>от {company.priceFrom.toLocaleString("ru-RU")} ₽ / час</strong></InfoRow>
+            <InfoRow>
+              <strong style={{ color: "inherit", fontSize: 18 }}>
+                от {company.priceFrom.toLocaleString("ru-RU")} ₽ / час
+              </strong>
+            </InfoRow>
           )}
           <Tags>
-            {company.tags.map((t: string) => <Tag key={t}>{t}</Tag>)}
+            {company.tags.map((t: string) => (
+              <Tag key={t}>{t}</Tag>
+            ))}
           </Tags>
           <Btn href="tel:+74950000000">Позвонить и забронировать</Btn>
         </Info>
@@ -164,7 +254,9 @@ function CompanyPage() {
       <Section>
         <h2>На карте</h2>
         <MapWrap>
-          <ClientOnly fallback={<div style={{ height: "100%", background: "#f7f9fc", borderRadius: 16 }} />}>
+          <ClientOnly
+            fallback={<div style={{ height: "100%", background: "#f7f9fc", borderRadius: 16 }} />}
+          >
             <CompaniesMap companies={[company]} />
           </ClientOnly>
         </MapWrap>
@@ -180,7 +272,9 @@ function CompanyPage() {
               <div className="head">
                 <div>
                   <div className="who">{r.author}</div>
-                  <div className="meta"><CalendarDays size={12} /> {fmtDate(r.date)}</div>
+                  <div className="meta">
+                    <CalendarDays size={12} /> {fmtDate(r.date)}
+                  </div>
                 </div>
                 <div className="stars">
                   {Array.from({ length: 5 }).map((_, i) => (

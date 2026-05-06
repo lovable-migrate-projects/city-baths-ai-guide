@@ -12,7 +12,11 @@ export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
       { title: "Карта бань и саун — Городские бани" },
-      { name: "description", content: "Интерактивная карта общественных бань и саун России. Найдите ближайшее заведение." },
+      {
+        name: "description",
+        content:
+          "Интерактивная карта общественных бань и саун России. Найдите ближайшее заведение.",
+      },
     ],
   }),
   component: MapPage,
@@ -30,9 +34,12 @@ const Wrap = styled.div`
 const Sidebar = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.border};
   background: ${({ theme }) => theme.colors.bg};
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
   max-height: 50vh;
-  @media (min-width: ${({ theme }) => theme.bp.md}) { max-height: none; }
+  @media (min-width: ${({ theme }) => theme.bp.md}) {
+    max-height: none;
+  }
 `;
 
 const SearchBox = styled.div`
@@ -47,21 +54,35 @@ const SearchBox = styled.div`
     font-family: inherit;
     font-size: 14px;
     background: ${({ theme }) => theme.colors.surface};
-    &:focus { outline: none; border-color: ${({ theme }) => theme.colors.primary}; }
+    &:focus {
+      outline: none;
+      border-color: ${({ theme }) => theme.colors.primary};
+    }
   }
-  svg { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); color: ${({ theme }) => theme.colors.muted}; }
+  svg {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${({ theme }) => theme.colors.muted};
+  }
 `;
 
 const List = styled.div`
   overflow-y: auto;
   padding: 12px;
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const MapPane = styled.div`
   position: relative;
   min-height: 400px;
-  .leaflet-container { height: 100% !important; min-height: 400px; }
+  .leaflet-container {
+    height: 100% !important;
+    min-height: 400px;
+  }
 `;
 
 function MapPage() {
@@ -71,10 +92,11 @@ function MapPage() {
   const filtered = useMemo(() => {
     if (!q.trim()) return ALL;
     const lower = q.toLowerCase();
-    return ALL.filter((c) =>
-      c.name.toLowerCase().includes(lower) ||
-      c.city.toLowerCase().includes(lower) ||
-      c.address.toLowerCase().includes(lower)
+    return ALL.filter(
+      (c) =>
+        c.name.toLowerCase().includes(lower) ||
+        c.city.toLowerCase().includes(lower) ||
+        c.address.toLowerCase().includes(lower),
     );
   }, [q]);
 

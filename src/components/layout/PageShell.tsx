@@ -9,7 +9,11 @@ const Main = styled.main`
 
 const Hero = styled.section`
   background:
-    radial-gradient(800px 320px at 80% -10%, ${({ theme }) => theme.colors.accent}, transparent 60%),
+    radial-gradient(
+      800px 320px at 80% -10%,
+      ${({ theme }) => theme.colors.accent},
+      transparent 60%
+    ),
     ${({ theme }) => theme.colors.bg};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;

@@ -8,7 +8,10 @@ export const Route = createFileRoute("/bani-otzivy")({
   head: () => ({
     meta: [
       { title: "Отзывы о банях и саунах — Городские бани" },
-      { name: "description", content: "Свежие отзывы посетителей бань и саун. Реальные впечатления и оценки." },
+      {
+        name: "description",
+        content: "Свежие отзывы посетителей бань и саун. Реальные впечатления и оценки.",
+      },
     ],
   }),
   component: ReviewsPage,
@@ -28,31 +31,58 @@ const Card = styled.article`
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 20px;
-  display: flex; flex-direction: column; gap: 10px;
-  transition: box-shadow .15s, transform .15s;
-  &:hover { box-shadow: ${({ theme }) => theme.shadows.card}; transform: translateY(-2px); }
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s;
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.card};
+    transform: translateY(-2px);
+  }
 `;
 
 const Top = styled.div`
-  display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
 `;
 
 const Author = styled.div`
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   .avatar {
-    width: 40px; height: 40px; border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: ${({ theme }) => theme.colors.accent};
     color: ${({ theme }) => theme.colors.primary};
-    display: grid; place-items: center;
-    font-weight: 700; font-size: 15px;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 15px;
   }
-  .name { font-weight: 600; }
-  .meta { font-size: 12.5px; color: ${({ theme }) => theme.colors.muted}; display: flex; align-items: center; gap: 4px; }
+  .name {
+    font-weight: 600;
+  }
+  .meta {
+    font-size: 12.5px;
+    color: ${({ theme }) => theme.colors.muted};
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 `;
 
 const Stars = styled.div`
-  display: inline-flex; gap: 2px;
-  svg { color: ${({ theme }) => theme.colors.star}; }
+  display: inline-flex;
+  gap: 2px;
+  svg {
+    color: ${({ theme }) => theme.colors.star};
+  }
 `;
 
 const Text = styled.p`
@@ -63,14 +93,21 @@ const Text = styled.p`
 `;
 
 const CompanyLink = styled(Link)`
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13.5px; font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.primary};
   margin-top: auto;
 `;
 
 function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
+  return new Date(iso).toLocaleDateString("ru-RU", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
 
 function ReviewsPage() {
@@ -87,7 +124,9 @@ function ReviewsPage() {
                 <div className="avatar">{r.author.charAt(0)}</div>
                 <div>
                   <div className="name">{r.author}</div>
-                  <div className="meta"><CalendarDays size={12} /> {fmtDate(r.date)}</div>
+                  <div className="meta">
+                    <CalendarDays size={12} /> {fmtDate(r.date)}
+                  </div>
                 </div>
               </Author>
               <Stars>

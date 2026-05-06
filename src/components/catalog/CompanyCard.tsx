@@ -7,10 +7,14 @@ const Card = styled.article<{ $highlighted?: boolean }>`
   grid-template-columns: 140px 1fr;
   gap: 14px;
   background: white;
-  border: 1px solid ${({ theme, $highlighted }) => $highlighted ? theme.colors.primary : theme.colors.border};
+  border: 1px solid
+    ${({ theme, $highlighted }) => ($highlighted ? theme.colors.primary : theme.colors.border)};
   border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
-  transition: border-color .15s, transform .15s, box-shadow .15s;
+  transition:
+    border-color 0.15s,
+    transform 0.15s,
+    box-shadow 0.15s;
   cursor: pointer;
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
@@ -41,7 +45,10 @@ const Title = styled.a`
   font-weight: 700;
   font-size: 18px;
   color: ${({ theme }) => theme.colors.text};
-  &:hover { color: ${({ theme }) => theme.colors.primary}; text-decoration: none; }
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    text-decoration: none;
+  }
 `;
 
 const Row = styled.div`
@@ -50,31 +57,49 @@ const Row = styled.div`
   gap: 6px;
   font-size: 13.5px;
   color: ${({ theme }) => theme.colors.muted};
-  svg { flex-shrink: 0; }
+  svg {
+    flex-shrink: 0;
+  }
 `;
 
 const Rating = styled.span`
-  display: inline-flex; align-items: center; gap: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
-  svg { color: ${({ theme }) => theme.colors.star }; fill: ${({ theme }) => theme.colors.star}; }
-  small { font-weight: 400; color: ${({ theme }) => theme.colors.muted}; margin-left: 4px; }
+  svg {
+    color: ${({ theme }) => theme.colors.star};
+    fill: ${({ theme }) => theme.colors.star};
+  }
+  small {
+    font-weight: 400;
+    color: ${({ theme }) => theme.colors.muted};
+    margin-left: 4px;
+  }
 `;
 
 const Status = styled.span<{ $open: boolean }>`
   font-size: 12.5px;
   font-weight: 600;
   color: ${({ $open, theme }) => ($open ? theme.colors.success : theme.colors.danger)};
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   &::before {
     content: "";
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: currentColor;
   }
 `;
 
 const Tags = styled.div`
-  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
 `;
 
 const Tag = styled.span`
@@ -86,7 +111,10 @@ const Tag = styled.span`
 `;
 
 const TopLine = styled.div`
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 `;
 
 type Props = {
@@ -112,7 +140,9 @@ export function CompanyCard({ company, highlighted, onHover }: Props) {
             <small>({company.reviewsCount})</small>
           </Rating>
         </TopLine>
-        <Row><MapPin size={14} /> {company.city}, {company.address}</Row>
+        <Row>
+          <MapPin size={14} /> {company.city}, {company.address}
+        </Row>
         <Row>
           <Clock size={14} /> {company.hours}
           <span style={{ marginLeft: 8 }}>
@@ -125,7 +155,9 @@ export function CompanyCard({ company, highlighted, onHover }: Props) {
           </Row>
         )}
         <Tags>
-          {company.tags.slice(0, 3).map((t) => <Tag key={t}>{t}</Tag>)}
+          {company.tags.slice(0, 3).map((t) => (
+            <Tag key={t}>{t}</Tag>
+          ))}
         </Tags>
       </Body>
     </Card>

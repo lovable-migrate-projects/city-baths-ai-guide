@@ -12,15 +12,33 @@ const Wrap = styled.div`
   border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  .leaflet-container { width: 100%; height: 100%; min-height: 480px; }
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+  }
 `;
 
 const PopupBody = styled.div`
   font-family: ${({ theme }) => theme.fonts.body};
   min-width: 200px;
-  strong { display: block; font-family: ${({ theme }) => theme.fonts.heading}; font-size: 14px; margin-bottom: 4px; }
-  p { margin: 0; font-size: 12.5px; color: ${({ theme }) => theme.colors.muted}; }
-  a { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 600; }
+  strong {
+    display: block;
+    font-family: ${({ theme }) => theme.fonts.heading};
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 0;
+    font-size: 12.5px;
+    color: ${({ theme }) => theme.colors.muted};
+  }
+  a {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
 `;
 
 const makeIcon = (highlighted: boolean) =>
@@ -63,16 +81,14 @@ export function CompaniesMap({ companies, highlightedId }: Props) {
         />
         <FitBounds companies={companies} />
         {companies.map((c) => (
-          <Marker
-            key={c.id}
-            position={[c.lat, c.lng]}
-            icon={makeIcon(highlightedId === c.id)}
-          >
+          <Marker key={c.id} position={[c.lat, c.lng]} icon={makeIcon(highlightedId === c.id)}>
             <Popup>
               <PopupBody>
                 <strong>{c.name}</strong>
                 <p>{c.address}</p>
-                <p>★ {c.rating.toFixed(1)} • {c.isOpenNow ? "Открыто" : "Закрыто"}</p>
+                <p>
+                  ★ {c.rating.toFixed(1)} • {c.isOpenNow ? "Открыто" : "Закрыто"}
+                </p>
                 <a href={`/companies/${c.id}/`}>Подробнее →</a>
               </PopupBody>
             </Popup>
