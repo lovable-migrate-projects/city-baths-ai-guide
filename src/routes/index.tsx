@@ -188,9 +188,6 @@ function Home() {
               <MapIcon size={14} /> Карта
             </ToggleBtn>
           </Toggle>
-              <MapIcon size={14} /> Карта
-            </ToggleBtn>
-          </Toggle>
         </Toolbar>
 
         <Layout $view={view}>
