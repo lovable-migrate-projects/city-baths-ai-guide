@@ -83,7 +83,7 @@ export function Header() {
           <a href="/ratings/">Рейтинги</a>
           <a href="/about/">О нас</a>
         </Nav>
-        <CTA to="/" search={{}}>Разместить заведение</CTA>
+        <CTA to="/">Разместить заведение</CTA>
       </Inner>
     </Bar>
   );
