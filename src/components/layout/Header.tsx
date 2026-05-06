@@ -225,11 +225,11 @@ const IconBtn = styled.button`
 
 const NAV_ITEMS = [
   { href: "/", label: "Каталог", icon: Building2 },
-  { href: "/map/", label: "Карта", icon: MapPin },
-  { href: "/bani-otzivy/", label: "Отзывы", icon: MessageSquare },
-  { href: "/ratings/", label: "Рейтинги", icon: Star },
-  { href: "/about/", label: "О нас", icon: Info },
-];
+  { href: "/map", label: "Карта", icon: MapPin },
+  { href: "/bani-otzivy", label: "Отзывы", icon: MessageSquare },
+  { href: "/ratings", label: "Рейтинги", icon: Star },
+  { href: "/about", label: "О нас", icon: Info },
+] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -256,13 +256,13 @@ export function Header() {
           </Brand>
           <Nav>
             <Link to="/">Каталог</Link>
-            <a href="/map/">Карта</a>
-            <a href="/bani-otzivy/">Отзывы</a>
-            <a href="/ratings/">Рейтинги</a>
-            <a href="/about/">О нас</a>
+            <Link to="/map">Карта</Link>
+            <Link to="/bani-otzivy">Отзывы</Link>
+            <Link to="/ratings">Рейтинги</Link>
+            <Link to="/about">О нас</Link>
           </Nav>
           <Right>
-            <CTA to="/">Разместить заведение</CTA>
+            <CTA to="/companies/create">Разместить заведение</CTA>
             <Burger
               type="button"
               aria-label={open ? "Закрыть меню" : "Открыть меню"}
@@ -297,15 +297,15 @@ export function Header() {
 
         <NavList>
           {NAV_ITEMS.map(({ href, label, icon: Icon }) => (
-            <a key={href} href={href} onClick={() => setOpen(false)}>
+            <Link key={href} to={href} onClick={() => setOpen(false)}>
               <Icon size={18} />
               {label}
-            </a>
+            </Link>
           ))}
         </NavList>
 
         <DrawerFoot>
-          <DrawerCTA to="/" onClick={() => setOpen(false)}>
+          <DrawerCTA to="/companies/create" onClick={() => setOpen(false)}>
             Разместить заведение
           </DrawerCTA>
           <Hint>Бесплатное размещение и продвижение</Hint>

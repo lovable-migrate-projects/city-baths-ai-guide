@@ -9,38 +9,148 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RatingsRouteImport } from './routes/ratings'
+import { Route as MapRouteImport } from './routes/map'
+import { Route as BaniOtzivyRouteImport } from './routes/bani-otzivy'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompaniesCreateRouteImport } from './routes/companies.create'
+import { Route as CompaniesIdRouteImport } from './routes/companies.$id'
 
+const RatingsRoute = RatingsRouteImport.update({
+  id: '/ratings',
+  path: '/ratings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaniOtzivyRoute = BaniOtzivyRouteImport.update({
+  id: '/bani-otzivy',
+  path: '/bani-otzivy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompaniesCreateRoute = CompaniesCreateRouteImport.update({
+  id: '/companies/create',
+  path: '/companies/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompaniesIdRoute = CompaniesIdRouteImport.update({
+  id: '/companies/$id',
+  path: '/companies/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bani-otzivy': typeof BaniOtzivyRoute
+  '/map': typeof MapRoute
+  '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bani-otzivy': typeof BaniOtzivyRoute
+  '/map': typeof MapRoute
+  '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bani-otzivy': typeof BaniOtzivyRoute
+  '/map': typeof MapRoute
+  '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BaniOtzivyRoute: typeof BaniOtzivyRoute
+  MapRoute: typeof MapRoute
+  RatingsRoute: typeof RatingsRoute
+  CompaniesIdRoute: typeof CompaniesIdRoute
+  CompaniesCreateRoute: typeof CompaniesCreateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ratings': {
+      id: '/ratings'
+      path: '/ratings'
+      fullPath: '/ratings'
+      preLoaderRoute: typeof RatingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bani-otzivy': {
+      id: '/bani-otzivy'
+      path: '/bani-otzivy'
+      fullPath: '/bani-otzivy'
+      preLoaderRoute: typeof BaniOtzivyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/companies/create': {
+      id: '/companies/create'
+      path: '/companies/create'
+      fullPath: '/companies/create'
+      preLoaderRoute: typeof CompaniesCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companies/$id': {
+      id: '/companies/$id'
+      path: '/companies/$id'
+      fullPath: '/companies/$id'
+      preLoaderRoute: typeof CompaniesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BaniOtzivyRoute: BaniOtzivyRoute,
+  MapRoute: MapRoute,
+  RatingsRoute: RatingsRoute,
+  CompaniesIdRoute: CompaniesIdRoute,
+  CompaniesCreateRoute: CompaniesCreateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
