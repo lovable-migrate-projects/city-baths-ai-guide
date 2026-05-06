@@ -1,0 +1,103 @@
+import type { Company } from "../types";
+
+const img = (seed: string) =>
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=800&q=70`;
+
+export const companies: Company[] = [
+  {
+    id: "1", slug: "sandunovskie-bani", name: "Сандуновские бани",
+    city: "Москва", address: "ул. Неглинная, 14, стр. 3-7",
+    image: img("photo-1610641818989-c2051b5e2cfd"),
+    rating: 4.8, reviewsCount: 1284, hours: "08:00 – 22:00", isOpenNow: true,
+    priceFrom: 2500, tags: ["Историческое здание", "Парная на дровах", "Бассейн"],
+    lat: 55.7637, lng: 37.6213,
+  },
+  {
+    id: "2", slug: "selezneskie-bani", name: "Селезнёвские бани",
+    city: "Москва", address: "ул. Селезнёвская, 15, стр. 2",
+    image: img("photo-1583416750470-965b2707b355"),
+    rating: 4.6, reviewsCount: 642, hours: "08:00 – 23:00", isOpenNow: true,
+    priceFrom: 1800, tags: ["Парная", "Купель", "VIP-залы"],
+    lat: 55.7836, lng: 37.6087,
+  },
+  {
+    id: "3", slug: "rzhevskie-bani", name: "Ржевские бани",
+    city: "Москва", address: "Банный пер., 3, стр. 2",
+    image: img("photo-1571175443880-49e1d25b2bc5"),
+    rating: 4.4, reviewsCount: 318, hours: "09:00 – 22:00", isOpenNow: false,
+    priceFrom: 1500, tags: ["Семейные номера", "Душ Шарко"],
+    lat: 55.7889, lng: 37.6314,
+  },
+  {
+    id: "4", slug: "varshavskie-bani", name: "Варшавские бани",
+    city: "Москва", address: "Варшавское ш., 34, к. 1",
+    image: img("photo-1596178065887-1198b6148b2b"),
+    rating: 4.3, reviewsCount: 221, hours: "10:00 – 00:00", isOpenNow: true,
+    priceFrom: 1200, tags: ["Бюджетно", "Парная"],
+    lat: 55.6745, lng: 37.6256,
+  },
+  {
+    id: "5", slug: "yamskie-bani", name: "Ямские бани",
+    city: "Москва", address: "ул. Достоевского, 9-11",
+    image: img("photo-1540541338287-41700207dee6"),
+    rating: 4.5, reviewsCount: 489, hours: "08:00 – 22:00", isOpenNow: true,
+    priceFrom: 2000, tags: ["Историческое здание", "Хамам"],
+    lat: 55.7861, lng: 37.6178,
+  },
+  {
+    id: "6", slug: "krasnopresnenskie-bani", name: "Краснопресненские бани",
+    city: "Москва", address: "Столярный пер., 7, стр. 1",
+    image: img("photo-1545239351-cefa43af60f3"),
+    rating: 4.7, reviewsCount: 902, hours: "10:00 – 23:00", isOpenNow: true,
+    priceFrom: 2200, tags: ["Бассейн", "СПА", "Массаж"],
+    lat: 55.7615, lng: 37.5708,
+  },
+  {
+    id: "7", slug: "bani-na-mytnoy", name: "Бани на Мытной",
+    city: "Москва", address: "ул. Мытная, 62",
+    image: img("photo-1604881988758-f76ad2f7aac1"),
+    rating: 4.2, reviewsCount: 174, hours: "09:00 – 23:00", isOpenNow: true,
+    priceFrom: 1300, tags: ["Уютно", "Парная"],
+    lat: 55.7152, lng: 37.6191,
+  },
+  {
+    id: "8", slug: "neklyudovskie-bani", name: "Неклюдовские бани",
+    city: "Санкт-Петербург", address: "ул. Маршала Говорова, 29",
+    image: img("photo-1600334129128-685c5582fd35"),
+    rating: 4.6, reviewsCount: 533, hours: "10:00 – 23:00", isOpenNow: true,
+    priceFrom: 1700, tags: ["Бассейн", "Купель"],
+    lat: 59.8856, lng: 30.2632,
+  },
+  {
+    id: "9", slug: "yamskie-bani-spb", name: "Ямские бани СПб",
+    city: "Санкт-Петербург", address: "ул. Достоевского, 9",
+    image: img("photo-1571902943202-507ec2618e8f"),
+    rating: 4.4, reviewsCount: 287, hours: "08:00 – 22:00", isOpenNow: false,
+    priceFrom: 1500, tags: ["Историческое здание"],
+    lat: 59.9237, lng: 30.3478,
+  },
+  {
+    id: "10", slug: "ural-banya", name: "Уральская баня",
+    city: "Екатеринбург", address: "ул. Куйбышева, 135",
+    image: img("photo-1531112343208-9cd6ad79f0e8"),
+    rating: 4.5, reviewsCount: 211, hours: "10:00 – 23:00", isOpenNow: true,
+    priceFrom: 1100, tags: ["Дровяная", "Купель"],
+    lat: 56.8228, lng: 60.6478,
+  },
+  {
+    id: "11", slug: "sibirskaya-banya", name: "Сибирская баня",
+    city: "Екатеринбург", address: "ул. Восточная, 56",
+    image: img("photo-1563992106-fed3ca5c6c9b"),
+    rating: 4.3, reviewsCount: 156, hours: "09:00 – 22:00", isOpenNow: true,
+    priceFrom: 900, tags: ["Семейные номера"],
+    lat: 56.8389, lng: 60.6312,
+  },
+  {
+    id: "12", slug: "tihaya-banya", name: "Тихая баня",
+    city: "Москва", address: "ул. Тихая, 12",
+    image: img("photo-1583847268964-b28dc8f51f92"),
+    rating: 4.1, reviewsCount: 98, hours: "10:00 – 23:00", isOpenNow: true,
+    priceFrom: 1000, tags: ["Бюджетно"],
+    lat: 55.6921, lng: 37.6789,
+  },
+];
