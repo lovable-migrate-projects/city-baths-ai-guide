@@ -14,6 +14,8 @@ import { Route as MapRouteImport } from './routes/map'
 import { Route as BaniOtzivyRouteImport } from './routes/bani-otzivy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompaniesCreateRouteImport } from './routes/companies.create'
+import { Route as CompaniesIdRouteImport } from './routes/companies.$id'
 
 const RatingsRoute = RatingsRouteImport.update({
   id: '/ratings',
@@ -40,6 +42,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompaniesCreateRoute = CompaniesCreateRouteImport.update({
+  id: '/companies/create',
+  path: '/companies/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompaniesIdRoute = CompaniesIdRouteImport.update({
+  id: '/companies/$id',
+  path: '/companies/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/bani-otzivy': typeof BaniOtzivyRoute
   '/map': typeof MapRoute
   '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/bani-otzivy': typeof BaniOtzivyRoute
   '/map': typeof MapRoute
   '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +78,37 @@ export interface FileRoutesById {
   '/bani-otzivy': typeof BaniOtzivyRoute
   '/map': typeof MapRoute
   '/ratings': typeof RatingsRoute
+  '/companies/$id': typeof CompaniesIdRoute
+  '/companies/create': typeof CompaniesCreateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/bani-otzivy' | '/map' | '/ratings'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/bani-otzivy' | '/map' | '/ratings'
-  id: '__root__' | '/' | '/about' | '/bani-otzivy' | '/map' | '/ratings'
+  to:
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/bani-otzivy'
+    | '/map'
+    | '/ratings'
+    | '/companies/$id'
+    | '/companies/create'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +117,8 @@ export interface RootRouteChildren {
   BaniOtzivyRoute: typeof BaniOtzivyRoute
   MapRoute: typeof MapRoute
   RatingsRoute: typeof RatingsRoute
+  CompaniesIdRoute: typeof CompaniesIdRoute
+  CompaniesCreateRoute: typeof CompaniesCreateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/companies/create': {
+      id: '/companies/create'
+      path: '/companies/create'
+      fullPath: '/companies/create'
+      preLoaderRoute: typeof CompaniesCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companies/$id': {
+      id: '/companies/$id'
+      path: '/companies/$id'
+      fullPath: '/companies/$id'
+      preLoaderRoute: typeof CompaniesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   BaniOtzivyRoute: BaniOtzivyRoute,
   MapRoute: MapRoute,
   RatingsRoute: RatingsRoute,
+  CompaniesIdRoute: CompaniesIdRoute,
+  CompaniesCreateRoute: CompaniesCreateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
