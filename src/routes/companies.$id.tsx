@@ -155,7 +155,7 @@ function CompanyPage() {
             <InfoRow><strong style={{ color: "inherit", fontSize: 18 }}>от {company.priceFrom.toLocaleString("ru-RU")} ₽ / час</strong></InfoRow>
           )}
           <Tags>
-            {company.tags.map((t) => <Tag key={t}>{t}</Tag>)}
+            {company.tags.map((t: string) => <Tag key={t}>{t}</Tag>)}
           </Tags>
           <Btn href="tel:+74950000000">Позвонить и забронировать</Btn>
         </Info>
