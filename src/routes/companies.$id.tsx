@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import styled from "styled-components";
-import { PageShell } from "../../components/layout/PageShell";
-import { ClientOnly } from "../../components/ClientOnly";
-import { CompaniesMap } from "../../components/map/CompaniesMap";
-import { companies as ALL } from "../../data/companies";
-import { reviews as ALL_REVIEWS } from "../../data/reviews";
+import { PageShell } from "../components/layout/PageShell";
+import { ClientOnly } from "../components/ClientOnly";
+import { CompaniesMap } from "../components/map/CompaniesMap";
+import { companies as ALL } from "../data/companies";
+import { reviews as ALL_REVIEWS } from "../data/reviews";
 import { Star, MapPin, Clock, Phone, Globe, ChevronLeft, CalendarDays } from "lucide-react";
 
 export const Route = createFileRoute("/companies/$id")({

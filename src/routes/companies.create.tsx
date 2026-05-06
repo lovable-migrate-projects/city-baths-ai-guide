@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import { useState } from "react";
-import { PageShell } from "../../components/layout/PageShell";
+import { PageShell } from "../components/layout/PageShell";
 import { Check, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/companies/create")({
