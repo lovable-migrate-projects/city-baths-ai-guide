@@ -97,7 +97,7 @@ function ReviewsPage() {
               </Stars>
             </Top>
             <Text>{r.text}</Text>
-            <CompanyLink to={"/companies/$id" as string} params={{ id: r.companyId } as never}>
+            <CompanyLink to="/companies/$id" params={{ id: r.companyId }}>
               <MapPin size={14} /> {r.companyName} · {r.companyCity}
             </CompanyLink>
           </Card>
