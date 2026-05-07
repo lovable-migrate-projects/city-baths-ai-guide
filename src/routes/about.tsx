@@ -1,20 +1,21 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import styled from "styled-components";
-import { PageShell } from "../components/layout/PageShell";
-import { Calendar, Users, Sparkles, Heart, ArrowRight } from "lucide-react";
+import { createFileRoute, Link } from '@tanstack/react-router'
+import styled from 'styled-components'
+import { PageShell } from '../components/layout/PageShell'
+import { Calendar, Users, Sparkles, Heart, ArrowRight } from 'lucide-react'
 
-export const Route = createFileRoute("/about")({
+export const Route = createFileRoute('/about')({
   head: () => ({
     meta: [
-      { title: "О проекте — Городские бани" },
+      { title: 'О проекте — Городские бани' },
       {
-        name: "description",
-        content: "Каталог общественных бань и саун России с 2012 года. Наша миссия и команда.",
+        name: 'description',
+        content:
+          'Каталог общественных бань и саун России с 2012 года. Наша миссия и команда.',
       },
     ],
   }),
   component: AboutPage,
-});
+})
 
 const Lead = styled.div`
   background: white;
@@ -25,7 +26,7 @@ const Lead = styled.div`
   font-size: 17px;
   color: ${({ theme }) => theme.colors.textSoft};
   line-height: 1.65;
-`;
+`
 
 const Grid = styled.div`
   display: grid;
@@ -38,10 +39,14 @@ const Grid = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.lg}) {
     grid-template-columns: repeat(4, 1fr);
   }
-`;
+`
 
 const Stat = styled.div`
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent}, white);
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.accent},
+    white
+  );
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 22px;
@@ -65,7 +70,7 @@ const Stat = styled.div`
     font-size: 14px;
     color: ${({ theme }) => theme.colors.muted};
   }
-`;
+`
 
 const Section = styled.section`
   margin-bottom: 32px;
@@ -77,7 +82,7 @@ const Section = styled.section`
     color: ${({ theme }) => theme.colors.textSoft};
     line-height: 1.65;
   }
-`;
+`
 
 const Values = styled.div`
   display: grid;
@@ -86,7 +91,7 @@ const Values = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     grid-template-columns: repeat(3, 1fr);
   }
-`;
+`
 
 const Value = styled.div`
   background: white;
@@ -106,7 +111,7 @@ const Value = styled.div`
     color: ${({ theme }) => theme.colors.textSoft};
     margin: 0;
   }
-`;
+`
 
 const CTA = styled.div`
   background: ${({ theme }) => theme.colors.primary};
@@ -141,7 +146,7 @@ const CTA = styled.div`
       opacity: 0.92;
     }
   }
-`;
+`
 
 function AboutPage() {
   return (
@@ -150,10 +155,11 @@ function AboutPage() {
       subtitle="Помогаем людям находить настоящие бани с 2012 года."
     >
       <Lead>
-        Портал «Городские бани» — это крупнейший в России каталог общественных бань и саун. Мы
-        собираем информацию о заведениях, проверяем её, публикуем отзывы реальных посетителей и
-        помогаем людям делать осознанный выбор. С 2024 года в каталоге работает ИИ-помощник, который
-        подбирает баню под ваш запрос на естественном языке.
+        Портал «Городские бани» — это крупнейший в России каталог общественных
+        бань и саун. Мы собираем информацию о заведениях, проверяем её,
+        публикуем отзывы реальных посетителей и помогаем людям делать осознанный
+        выбор. С 2024 года в каталоге работает ИИ-помощник, который подбирает
+        баню под ваш запрос на естественном языке.
       </Lead>
 
       <Grid>
@@ -190,9 +196,10 @@ function AboutPage() {
       <Section>
         <h2>Наша миссия</h2>
         <p>
-          Сохранять и развивать культуру русской бани. Делать поиск качественного заведения простым
-          и быстрым — будь то историческая баня в центре города или новая частная сауна на окраине.
-          Мы независимы от рекламодателей, поэтому отзывы и рейтинги остаются честными.
+          Сохранять и развивать культуру русской бани. Делать поиск
+          качественного заведения простым и быстрым — будь то историческая баня
+          в центре города или новая частная сауна на окраине. Мы независимы от
+          рекламодателей, поэтому отзывы и рейтинги остаются честными.
         </p>
       </Section>
 
@@ -207,7 +214,9 @@ function AboutPage() {
           <Value>
             <Sparkles size={24} />
             <h3>Технологии</h3>
-            <p>Используем ИИ для точного подбора заведений и интерактивные карты.</p>
+            <p>
+              Используем ИИ для точного подбора заведений и интерактивные карты.
+            </p>
           </Value>
           <Value>
             <Users size={24} />
@@ -225,5 +234,5 @@ function AboutPage() {
         </Link>
       </CTA>
     </PageShell>
-  );
+  )
 }

@@ -1,11 +1,15 @@
-import styled from "styled-components";
-import { ArrowRight, Building2, ShieldCheck } from "lucide-react";
+import styled from 'styled-components'
+import { ArrowRight, Building2, ShieldCheck } from 'lucide-react'
 
 const Wrap = styled.section`
   margin-top: 56px;
   padding: 36px;
   border-radius: ${({ theme }) => theme.radii.xl};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent} 0%, white 70%);
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.accent} 0%,
+    white 70%
+  );
   border: 1px solid ${({ theme }) => theme.colors.border};
   display: grid;
   gap: 24px;
@@ -14,7 +18,7 @@ const Wrap = styled.section`
     grid-template-columns: 2fr 1fr;
     align-items: center;
   }
-`;
+`
 
 const Body = styled.div`
   h2 {
@@ -25,7 +29,7 @@ const Body = styled.div`
     color: ${({ theme }) => theme.colors.textSoft};
     max-width: 580px;
   }
-`;
+`
 
 const Features = styled.ul`
   display: grid;
@@ -41,13 +45,13 @@ const Features = styled.ul`
   svg {
     color: ${({ theme }) => theme.colors.primary};
   }
-`;
+`
 
 const Buttons = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-`;
+`
 
 const Primary = styled.a`
   background: ${({ theme }) => theme.colors.primary};
@@ -62,7 +66,7 @@ const Primary = styled.a`
     background: ${({ theme }) => theme.colors.primaryDark};
     text-decoration: none;
   }
-`;
+`
 
 const Secondary = styled.a`
   background: white;
@@ -75,7 +79,7 @@ const Secondary = styled.a`
     border-color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
   }
-`;
+`
 
 const Plans = styled.div`
   background: white;
@@ -84,13 +88,16 @@ const Plans = styled.div`
   padding: 18px;
   display: grid;
   gap: 12px;
-`;
+`
 
 const Plan = styled.div<{ $featured?: boolean }>`
   padding: 12px 14px;
   border-radius: ${({ theme }) => theme.radii.md};
-  background: ${({ theme, $featured }) => ($featured ? theme.colors.accent : theme.colors.surface)};
-  border: 1px solid ${({ theme, $featured }) => ($featured ? theme.colors.primary : "transparent")};
+  background: ${({ theme, $featured }) =>
+    $featured ? theme.colors.accent : theme.colors.surface};
+  border: 1px solid
+    ${({ theme, $featured }) =>
+      $featured ? theme.colors.primary : 'transparent'};
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -106,7 +113,7 @@ const Plan = styled.div<{ $featured?: boolean }>`
     color: ${({ theme }) => theme.colors.primary};
     font-size: 15px;
   }
-`;
+`
 
 export function OwnerCTA() {
   return (
@@ -114,12 +121,13 @@ export function OwnerCTA() {
       <Body>
         <h2>Это ваше заведение? Разместите его бесплатно</h2>
         <p>
-          Мы помогаем баням, саунам и базам отдыха находить клиентов по всей России. Заявите права
-          на карточку или добавьте новое заведение.
+          Мы помогаем баням, саунам и базам отдыха находить клиентов по всей
+          России. Заявите права на карточку или добавьте новое заведение.
         </p>
         <Features>
           <li>
-            <ShieldCheck size={18} /> Без рекламных манипуляций — только честные отзывы
+            <ShieldCheck size={18} /> Без рекламных манипуляций — только честные
+            отзывы
           </li>
           <li>
             <Building2 size={18} /> Бесплатный тариф навсегда
@@ -151,5 +159,5 @@ export function OwnerCTA() {
         </Plan>
       </Plans>
     </Wrap>
-  );
+  )
 }

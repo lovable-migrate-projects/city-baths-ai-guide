@@ -1,26 +1,26 @@
-import styled, { keyframes } from "styled-components";
-import { Send, Sparkles } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import type { ChatMessage, Company } from "../../types";
+import styled, { keyframes } from 'styled-components'
+import { Send, Sparkles } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
+import type { ChatMessage, Company } from '../../types'
 
 type Props = {
-  messages: ChatMessage[];
-  isStreaming?: boolean;
-  onSend: (text: string) => void;
-  suggestions?: string[];
-  compact?: boolean;
-};
+  messages: ChatMessage[]
+  isStreaming?: boolean
+  onSend: (text: string) => void
+  suggestions?: string[]
+  compact?: boolean
+}
 
 const Card = styled.div<{ $compact?: boolean }>`
   position: relative;
   background: ${({ theme }) => theme.colors.bg};
   border-radius: ${({ theme }) => theme.radii.xl};
-  padding: ${({ $compact }) => ($compact ? "16px" : "20px")};
+  padding: ${({ $compact }) => ($compact ? '16px' : '20px')};
   box-shadow: ${({ theme }) => theme.shadows.card};
   border: 1px solid ${({ theme }) => theme.colors.border};
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: -1px;
     border-radius: inherit;
@@ -39,7 +39,7 @@ const Card = styled.div<{ $compact?: boolean }>`
     pointer-events: none;
     opacity: 0.9;
   }
-`;
+`
 
 const Head = styled.div`
   display: flex;
@@ -52,13 +52,13 @@ const Head = styled.div`
   svg {
     color: ${({ theme }) => theme.colors.primary};
   }
-`;
+`
 
 const Hint = styled.div`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.muted};
   margin-bottom: 14px;
-`;
+`
 
 const Messages = styled.div`
   max-height: 360px;
@@ -71,18 +71,19 @@ const Messages = styled.div`
   &:empty {
     display: none;
   }
-`;
+`
 
-const Bubble = styled.div<{ $role: "user" | "assistant" }>`
-  align-self: ${({ $role }) => ($role === "user" ? "flex-end" : "flex-start")};
+const Bubble = styled.div<{ $role: 'user' | 'assistant' }>`
+  align-self: ${({ $role }) => ($role === 'user' ? 'flex-end' : 'flex-start')};
   max-width: 85%;
   padding: 10px 14px;
   border-radius: ${({ theme }) => theme.radii.lg};
   font-size: 14.5px;
   line-height: 1.5;
   background: ${({ $role, theme }) =>
-    $role === "user" ? theme.colors.primary : theme.colors.accent};
-  color: ${({ $role, theme }) => ($role === "user" ? "white" : theme.colors.text)};
+    $role === 'user' ? theme.colors.primary : theme.colors.accent};
+  color: ${({ $role, theme }) =>
+    $role === 'user' ? 'white' : theme.colors.text};
   p {
     margin: 0 0 0.5em;
     &:last-child {
@@ -94,7 +95,7 @@ const Bubble = styled.div<{ $role: "user" | "assistant" }>`
     padding-left: 18px;
     margin: 0.25em 0;
   }
-`;
+`
 
 const ResultsRow = styled.div`
   display: grid;
@@ -104,7 +105,7 @@ const ResultsRow = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.sm}) {
     grid-template-columns: 1fr 1fr;
   }
-`;
+`
 
 const Result = styled.a`
   display: flex;
@@ -133,13 +134,13 @@ const Result = styled.a`
     font-size: 12px;
     color: ${({ theme }) => theme.colors.muted};
   }
-`;
+`
 
 const InputRow = styled.form`
   display: flex;
   gap: 8px;
   align-items: stretch;
-`;
+`
 
 const Input = styled.input`
   flex: 1;
@@ -159,7 +160,7 @@ const Input = styled.input`
     background: white;
     box-shadow: 0 0 0 4px ${({ theme }) => theme.colors.accent};
   }
-`;
+`
 
 const SendBtn = styled.button`
   border: 0;
@@ -184,14 +185,14 @@ const SendBtn = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
-`;
+`
 
 const Chips = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
-`;
+`
 
 const Chip = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.border};
@@ -206,12 +207,12 @@ const Chip = styled.button`
     color: ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.accent};
   }
-`;
+`
 
 const blink = keyframes`
   0%, 80%, 100% { opacity: .25; }
   40% { opacity: 1; }
-`;
+`
 
 const Typing = styled.div`
   display: inline-flex;
@@ -233,7 +234,7 @@ const Typing = styled.div`
   span:nth-child(3) {
     animation-delay: 0.3s;
   }
-`;
+`
 
 function ResultCards({ companies }: { companies: Company[] }) {
   return (
@@ -250,24 +251,30 @@ function ResultCards({ companies }: { companies: Company[] }) {
         </Result>
       ))}
     </ResultsRow>
-  );
+  )
 }
 
-export function AIChatPanel({ messages, isStreaming, onSend, suggestions = [], compact }: Props) {
-  const [text, setText] = useState("");
-  const scrollRef = useRef<HTMLDivElement>(null);
+export function AIChatPanel({
+  messages,
+  isStreaming,
+  onSend,
+  suggestions = [],
+  compact,
+}: Props) {
+  const [text, setText] = useState('')
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: 9e9, behavior: "smooth" });
-  }, [messages, isStreaming]);
+    scrollRef.current?.scrollTo({ top: 9e9, behavior: 'smooth' })
+  }, [messages, isStreaming])
 
   const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const t = text.trim();
-    if (!t) return;
-    onSend(t);
-    setText("");
-  };
+    e.preventDefault()
+    const t = text.trim()
+    if (!t) return
+    onSend(t)
+    setText('')
+  }
 
   return (
     <Card $compact={compact}>
@@ -281,7 +288,9 @@ export function AIChatPanel({ messages, isStreaming, onSend, suggestions = [], c
         {messages.map((m) => (
           <Bubble key={m.id} $role={m.role}>
             <ReactMarkdown>{m.content}</ReactMarkdown>
-            {m.companies && m.companies.length > 0 && <ResultCards companies={m.companies} />}
+            {m.companies && m.companies.length > 0 && (
+              <ResultCards companies={m.companies} />
+            )}
           </Bubble>
         ))}
         {isStreaming && (
@@ -315,5 +324,5 @@ export function AIChatPanel({ messages, isStreaming, onSend, suggestions = [], c
         </Chips>
       )}
     </Card>
-  );
+  )
 }

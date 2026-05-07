@@ -1,21 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import styled from "styled-components";
-import { useState } from "react";
-import { PageShell } from "../components/layout/PageShell";
-import { Check, ArrowRight } from "lucide-react";
+import { createFileRoute, Link } from '@tanstack/react-router'
+import styled from 'styled-components'
+import { useState } from 'react'
+import { PageShell } from '../components/layout/PageShell'
+import { Check, ArrowRight } from 'lucide-react'
 
-export const Route = createFileRoute("/companies/create")({
+export const Route = createFileRoute('/companies/create')({
   head: () => ({
     meta: [
-      { title: "Разместить заведение — Городские бани" },
+      { title: 'Разместить заведение — Городские бани' },
       {
-        name: "description",
-        content: "Бесплатно добавьте баню или сауну в крупнейший каталог России.",
+        name: 'description',
+        content:
+          'Бесплатно добавьте баню или сауну в крупнейший каталог России.',
       },
     ],
   }),
   component: CreatePage,
-});
+})
 
 const Layout = styled.div`
   display: grid;
@@ -24,7 +25,7 @@ const Layout = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     grid-template-columns: 1.4fr 1fr;
   }
-`;
+`
 
 const Form = styled.form`
   background: white;
@@ -34,7 +35,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
+`
 
 const Field = styled.label`
   display: flex;
@@ -67,7 +68,7 @@ const Field = styled.label`
     min-height: 100px;
     resize: vertical;
   }
-`;
+`
 
 const Row = styled.div`
   display: grid;
@@ -76,7 +77,7 @@ const Row = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.sm}) {
     grid-template-columns: 1fr 1fr;
   }
-`;
+`
 
 const Submit = styled.button`
   margin-top: 8px;
@@ -95,16 +96,20 @@ const Submit = styled.button`
   &:hover {
     background: ${({ theme }) => theme.colors.primaryDark};
   }
-`;
+`
 
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 14px;
-`;
+`
 
 const Benefits = styled.div`
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent}, white);
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.accent},
+    white
+  );
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 22px;
@@ -129,7 +134,7 @@ const Benefits = styled.div`
     flex-shrink: 0;
     margin-top: 2px;
   }
-`;
+`
 
 const Success = styled.div`
   background: white;
@@ -140,21 +145,24 @@ const Success = styled.div`
   h2 {
     color: ${({ theme }) => theme.colors.success};
   }
-`;
+`
 
 function CreatePage() {
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(false)
 
   if (sent) {
     return (
-      <PageShell title="Заявка принята" subtitle="Мы свяжемся с вами в течение рабочего дня.">
+      <PageShell
+        title="Заявка принята"
+        subtitle="Мы свяжемся с вами в течение рабочего дня."
+      >
         <Success>
           <h2>Спасибо! 🎉</h2>
           <p>Ваше заведение скоро появится в каталоге после модерации.</p>
           <Link to="/">← Вернуться на главную</Link>
         </Success>
       </PageShell>
-    );
+    )
   }
 
   return (
@@ -165,13 +173,17 @@ function CreatePage() {
       <Layout>
         <Form
           onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
+            e.preventDefault()
+            setSent(true)
           }}
         >
           <Field>
             Название заведения <span className="req">*</span>
-            <input required type="text" placeholder="Например, Сандуновские бани" />
+            <input
+              required
+              type="text"
+              placeholder="Например, Сандуновские бани"
+            />
           </Field>
           <Row>
             <Field>
@@ -230,7 +242,8 @@ function CreatePage() {
             <h3>Что вы получите</h3>
             <ul>
               <li>
-                <Check size={18} /> Бесплатное размещение в крупнейшем каталоге бань России
+                <Check size={18} /> Бесплатное размещение в крупнейшем каталоге
+                бань России
               </li>
               <li>
                 <Check size={18} /> Подробная карточка с фото, ценами и услугами
@@ -252,5 +265,5 @@ function CreatePage() {
         </Aside>
       </Layout>
     </PageShell>
-  );
+  )
 }

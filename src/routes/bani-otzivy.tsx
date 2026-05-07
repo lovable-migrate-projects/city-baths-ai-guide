@@ -1,21 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import styled from "styled-components";
-import { PageShell } from "../components/layout/PageShell";
-import { reviews } from "../data/reviews";
-import { Star, MapPin, CalendarDays } from "lucide-react";
+import { createFileRoute, Link } from '@tanstack/react-router'
+import styled from 'styled-components'
+import { PageShell } from '../components/layout/PageShell'
+import { reviews } from '../data/reviews'
+import { Star, MapPin, CalendarDays } from 'lucide-react'
 
-export const Route = createFileRoute("/bani-otzivy")({
+export const Route = createFileRoute('/bani-otzivy')({
   head: () => ({
     meta: [
-      { title: "Отзывы о банях и саунах — Городские бани" },
+      { title: 'Отзывы о банях и саунах — Городские бани' },
       {
-        name: "description",
-        content: "Свежие отзывы посетителей бань и саун. Реальные впечатления и оценки.",
+        name: 'description',
+        content:
+          'Свежие отзывы посетителей бань и саун. Реальные впечатления и оценки.',
       },
     ],
   }),
   component: ReviewsPage,
-});
+})
 
 const Grid = styled.div`
   display: grid;
@@ -24,7 +25,7 @@ const Grid = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     grid-template-columns: 1fr 1fr;
   }
-`;
+`
 
 const Card = styled.article`
   background: white;
@@ -41,14 +42,14 @@ const Card = styled.article`
     box-shadow: ${({ theme }) => theme.shadows.card};
     transform: translateY(-2px);
   }
-`;
+`
 
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 10px;
-`;
+`
 
 const Author = styled.div`
   display: flex;
@@ -75,7 +76,7 @@ const Author = styled.div`
     align-items: center;
     gap: 4px;
   }
-`;
+`
 
 const Stars = styled.div`
   display: inline-flex;
@@ -83,14 +84,14 @@ const Stars = styled.div`
   svg {
     color: ${({ theme }) => theme.colors.star};
   }
-`;
+`
 
 const Text = styled.p`
   margin: 0;
   color: ${({ theme }) => theme.colors.textSoft};
   font-size: 14.5px;
   line-height: 1.55;
-`;
+`
 
 const CompanyLink = styled(Link)`
   display: inline-flex;
@@ -100,14 +101,14 @@ const CompanyLink = styled(Link)`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.primary};
   margin-top: auto;
-`;
+`
 
 function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString("ru-RU", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return new Date(iso).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
 }
 
 function ReviewsPage() {
@@ -131,17 +132,24 @@ function ReviewsPage() {
               </Author>
               <Stars>
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={16} fill={i < r.rating ? "currentColor" : "none"} />
+                  <Star
+                    key={i}
+                    size={16}
+                    fill={i < r.rating ? 'currentColor' : 'none'}
+                  />
                 ))}
               </Stars>
             </Top>
             <Text>{r.text}</Text>
-            <CompanyLink to={"/companies/$id" as string} params={{ id: r.companyId } as never}>
+            <CompanyLink
+              to={'/companies/$id' as string}
+              params={{ id: r.companyId } as never}
+            >
               <MapPin size={14} /> {r.companyName} · {r.companyCity}
             </CompanyLink>
           </Card>
         ))}
       </Grid>
     </PageShell>
-  );
+  )
 }
