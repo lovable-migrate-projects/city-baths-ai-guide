@@ -1,13 +1,14 @@
 import styled, { keyframes } from 'styled-components'
 import { Send, Sparkles } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import type { ChatMessage, Company } from '../../types'
+import { Link } from '@tanstack/react-router'
 
 type Props = {
   messages: ChatMessage[]
   isStreaming?: boolean
-  onSend: (text: string) => void
+  onSend: ((text: string) => void) | undefined
   suggestions?: string[]
   compact?: boolean
 }
@@ -107,7 +108,7 @@ const ResultsRow = styled.div`
   }
 `
 
-const Result = styled.a`
+const Result = styled(Link)`
   display: flex;
   gap: 10px;
   padding: 8px;
@@ -240,13 +241,15 @@ function ResultCards({ companies }: { companies: Company[] }) {
   return (
     <ResultsRow>
       {companies.slice(0, 4).map((c) => (
-        <Result key={c.id} href={`/companies/${c.id}/`}>
-          <img src={c.image} alt={c.name} loading="lazy" />
+        <Result key={c.id} to={`/companies/${c.id}/`}>
+          {c.image && <img src={c.image} alt={c.name} loading="lazy" />}
           <div>
             <strong>{c.name}</strong>
-            <span>
-              {c.city} • ★ {c.rating.toFixed(1)}
-            </span>
+            {!!c.rating && (
+              <span>
+                {c.city} • ★ {c.rating.toFixed(1)}
+              </span>
+            )}
           </div>
         </Result>
       ))}
@@ -272,7 +275,7 @@ export function AIChatPanel({
     e.preventDefault()
     const t = text.trim()
     if (!t) return
-    onSend(t)
+    onSend?.(t)
     setText('')
   }
 
@@ -305,7 +308,9 @@ export function AIChatPanel({
       <InputRow onSubmit={submit}>
         <Input
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setText(e.target.value)
+          }
           placeholder="Например: «баня с бассейном в Москве до 2500₽»"
           aria-label="Сообщение ИИ-помощнику"
         />
@@ -317,7 +322,7 @@ export function AIChatPanel({
       {suggestions.length > 0 && (
         <Chips>
           {suggestions.map((s) => (
-            <Chip key={s} type="button" onClick={() => onSend(s)}>
+            <Chip key={s} type="button" onClick={() => onSend?.(s)}>
               {s}
             </Chip>
           ))}

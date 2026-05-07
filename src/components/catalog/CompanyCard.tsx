@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 import { Star, MapPin, Clock } from 'lucide-react'
 import type { Company } from '../../types'
+import { useCallback } from 'react'
+import { Link } from '@tanstack/react-router'
 
-const Card = styled.article<{ $highlighted?: boolean }>`
+type CardProps = { $highlighted?: boolean }
+
+const Card = styled.article<CardProps>`
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 14px;
@@ -25,6 +29,8 @@ const Card = styled.article<{ $highlighted?: boolean }>`
   @media (min-width: ${({ theme }) => theme.bp.sm}) {
     grid-template-columns: 180px 1fr;
   }
+  overflow: hidden;
+  max-height: 180px;
 `
 
 const Img = styled.div<{ $src: string }>`
@@ -41,7 +47,7 @@ const Body = styled.div`
   gap: 6px;
 `
 
-const Title = styled.a`
+const Title = styled(Link)`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: 700;
   font-size: 18px;
@@ -126,37 +132,56 @@ type Props = {
 }
 
 export function CompanyCard({ company, highlighted, onHover }: Props) {
+  const onMouseEnter = useCallback(
+    () => onHover?.(company.id),
+    [company.id, onHover],
+  )
+  const onMouseLeave = useCallback(() => onHover?.(null), [onHover])
+
   return (
     <Card
       $highlighted={highlighted}
-      onMouseEnter={() => onHover?.(company.id)}
-      onMouseLeave={() => onHover?.(null)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
-      <Img $src={company.image} role="img" aria-label={company.name} />
+      {company.image && (
+        <Img $src={company.image} role="img" aria-label={company.name} />
+      )}
       <Body>
         <TopLine>
-          <Title href={`/companies/${company.id}/`}>{company.name}</Title>
-          <Rating>
-            <Star size={15} />
-            {company.rating.toFixed(1)}
-            <small>({company.reviewsCount})</small>
-          </Rating>
+          <Title to={company.href}>{company.name}</Title>
+          {!!company.rating && (
+            <Rating>
+              <Star size={15} />
+              {company.rating.toFixed(1)}
+              <small>({company.reviewsCount})</small>
+            </Rating>
+          )}
         </TopLine>
-        <Row>
-          <MapPin size={14} /> {company.city}, {company.address}
-        </Row>
-        <Row>
-          <Clock size={14} /> {company.hours}
-          <span style={{ marginLeft: 8 }}>
-            <Status $open={company.isOpenNow}>
-              {company.isOpenNow ? 'Открыто' : 'Закрыто'}
-            </Status>
-          </span>
-        </Row>
+        {company.city || company.address ? (
+          <Row>
+            <MapPin size={14} /> {[company.city, company.address].join(', ')}
+          </Row>
+        ) : undefined}
+        {company.hours && (
+          <Row>
+            <Clock size={14} /> {company.hours}
+            {company.isOpenNow !== undefined && (
+              <span style={{ marginLeft: 8 }}>
+                <Status $open={company.isOpenNow}>
+                  {company.isOpenNow ? 'Открыто' : 'Закрыто'}
+                </Status>
+              </span>
+            )}
+          </Row>
+        )}
         {company.priceFrom && (
           <Row style={{ color: 'inherit' }}>
             <strong>от {company.priceFrom.toLocaleString('ru-RU')} ₽</strong>
           </Row>
+        )}
+        {company.intro && (
+          <Row style={{ color: 'inherit' }}>{company.intro}</Row>
         )}
         <Tags>
           {company.tags.slice(0, 3).map((t) => (

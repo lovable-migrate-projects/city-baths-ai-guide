@@ -86,6 +86,12 @@ const Bottom = styled.div`
   color: ${({ theme }) => theme.colors.muted};
 `
 
+const UlStyled = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const DEFAULT_FOOTER_SECTIONS: ReadonlyArray<FooterSection> = [
   {
@@ -132,13 +138,13 @@ export function Footer({
         {sections.map((section, i) => (
           <Col key={i}>
             <h4>{section.title}</h4>
-            <ul>
+            <UlStyled>
               {section.links.map((link, j) => (
                 <li key={j}>
                   <LinkComponent to={link.to}>{link.label}</LinkComponent>
                 </li>
               ))}
-            </ul>
+            </UlStyled>
           </Col>
         ))}
       </Inner>

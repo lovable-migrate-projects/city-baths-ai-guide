@@ -126,7 +126,7 @@ function RatingsPage() {
   const ranked = useMemo(() => {
     const filtered =
       city === 'Все города' ? ALL : ALL.filter((c) => c.city === city)
-    return [...filtered].sort((a, b) => b.rating - a.rating)
+    return [...filtered].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
   }, [city])
 
   return (
@@ -156,11 +156,13 @@ function RatingsPage() {
                 <MapPin size={12} /> {c.city}, {c.address}
               </div>
             </Info>
-            <RatingCell>
-              <Star size={18} />
-              {c.rating.toFixed(1)}
-              <small>({c.reviewsCount})</small>
-            </RatingCell>
+            {!!c.rating && (
+              <RatingCell>
+                <Star size={18} />
+                {c.rating.toFixed(1)}
+                <small>({c.reviewsCount})</small>
+              </RatingCell>
+            )}
           </Row>
         ))}
       </Table>

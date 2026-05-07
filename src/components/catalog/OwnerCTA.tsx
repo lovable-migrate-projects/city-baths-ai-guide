@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { ArrowRight, Building2, ShieldCheck } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 
 const Wrap = styled.section`
   margin-top: 56px;
@@ -53,7 +54,7 @@ const Buttons = styled.div`
   gap: 10px;
 `
 
-const Primary = styled.a`
+const Primary = styled(Link)`
   background: ${({ theme }) => theme.colors.primary};
   color: white;
   padding: 12px 22px;
@@ -68,7 +69,7 @@ const Primary = styled.a`
   }
 `
 
-const Secondary = styled.a`
+const Secondary = styled(Link)`
   background: white;
   color: ${({ theme }) => theme.colors.primary};
   padding: 12px 22px;
@@ -134,10 +135,10 @@ export function OwnerCTA() {
           </li>
         </Features>
         <Buttons>
-          <Primary href="/companies/create">
+          <Primary to="/companies/create">
             Разместить заведение <ArrowRight size={16} />
           </Primary>
-          <Secondary href="/about/">О тарифах</Secondary>
+          <Secondary to="/about/">О тарифах</Secondary>
         </Buttons>
       </Body>
       <Plans>

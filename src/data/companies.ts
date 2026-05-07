@@ -196,4 +196,4 @@ export const companies: Company[] = [
     lat: 55.6921,
     lng: 37.6789,
   },
-]
+].map((n) => ({ ...n, href: `/companies/${n.id}` }))
