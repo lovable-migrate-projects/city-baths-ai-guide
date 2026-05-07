@@ -92,10 +92,12 @@ export function CompaniesMap({ companies, highlightedId }: Props) {
               <PopupBody>
                 <strong>{c.name}</strong>
                 <p>{c.address}</p>
-                <p>
-                  ★ {c.rating.toFixed(1)} •{' '}
-                  {c.isOpenNow ? 'Открыто' : 'Закрыто'}
-                </p>
+                {!!c.rating && (
+                  <p>
+                    ★ {c.rating.toFixed(1)} •{' '}
+                    {c.isOpenNow ? 'Открыто' : 'Закрыто'}
+                  </p>
+                )}
                 <a href={`/companies/${c.id}/`}>Подробнее →</a>
               </PopupBody>
             </Popup>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Sparkles, X } from 'lucide-react'
 import { AIChatPanel } from './AIChatPanel'
 import type { ChatMessage } from '../../types'
@@ -92,7 +92,9 @@ export function AIChatFloating(props: Props) {
       </Fab>
       {open && (
         <Backdrop onClick={() => setOpen(false)}>
-          <Panel onClick={(e) => e.stopPropagation()}>
+          <Panel
+            onClick={(e: React.MouseEvent<HTMLElement>) => e.stopPropagation()}
+          >
             <Close onClick={() => setOpen(false)} aria-label="Закрыть">
               <X size={18} />
             </Close>

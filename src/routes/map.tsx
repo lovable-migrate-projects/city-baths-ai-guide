@@ -90,13 +90,17 @@ function MapPage() {
   const [hovered, setHovered] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
-    if (!q.trim()) return ALL
+    if (!q.trim()) {
+      return ALL
+    }
+
     const lower = q.toLowerCase()
+
     return ALL.filter(
       (c) =>
         c.name.toLowerCase().includes(lower) ||
-        c.city.toLowerCase().includes(lower) ||
-        c.address.toLowerCase().includes(lower),
+        c.city?.toLowerCase().includes(lower) ||
+        c.address?.toLowerCase().includes(lower),
     )
   }, [q])
 

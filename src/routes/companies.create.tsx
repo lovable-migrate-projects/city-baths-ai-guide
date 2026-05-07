@@ -172,7 +172,7 @@ function CreatePage() {
     >
       <Layout>
         <Form
-          onSubmit={(e) => {
+          onSubmit={(e: React.FormEvent) => {
             e.preventDefault()
             setSent(true)
           }}

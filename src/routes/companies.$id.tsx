@@ -31,7 +31,7 @@ export const Route = createFileRoute('/companies/$id')({
               loaderData.company.city
             }. Адрес: ${
               loaderData.company.address
-            }. Рейтинг ${loaderData.company.rating.toFixed(1)} на основе ${
+            }. Рейтинг ${loaderData.company.rating?.toFixed(1)} на основе ${
               loaderData.company.reviewsCount
             } отзывов.`,
           },
@@ -236,7 +236,7 @@ function CompanyPage() {
           <h1>{company.name}</h1>
           <RatingBig>
             <Star size={22} />
-            <strong>{company.rating.toFixed(1)}</strong>
+            <strong>{company.rating?.toFixed(1)}</strong>
             <span>({company.reviewsCount} отзывов)</span>
           </RatingBig>
           <InfoRow>
