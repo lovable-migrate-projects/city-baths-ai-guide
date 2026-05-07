@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Star, MapPin, Clock } from "lucide-react";
-import type { Company } from "../../types";
+import styled from 'styled-components'
+import { Star, MapPin, Clock } from 'lucide-react'
+import type { Company } from '../../types'
 
 const Card = styled.article<{ $highlighted?: boolean }>`
   display: grid;
@@ -8,7 +8,8 @@ const Card = styled.article<{ $highlighted?: boolean }>`
   gap: 14px;
   background: white;
   border: 1px solid
-    ${({ theme, $highlighted }) => ($highlighted ? theme.colors.primary : theme.colors.border)};
+    ${({ theme, $highlighted }) =>
+      $highlighted ? theme.colors.primary : theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
   transition:
@@ -24,21 +25,21 @@ const Card = styled.article<{ $highlighted?: boolean }>`
   @media (min-width: ${({ theme }) => theme.bp.sm}) {
     grid-template-columns: 180px 1fr;
   }
-`;
+`
 
 const Img = styled.div<{ $src: string }>`
   background-image: url(${({ $src }) => $src});
   background-size: cover;
   background-position: center;
   min-height: 130px;
-`;
+`
 
 const Body = styled.div`
   padding: 14px 14px 14px 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
-`;
+`
 
 const Title = styled.a`
   font-family: ${({ theme }) => theme.fonts.heading};
@@ -49,7 +50,7 @@ const Title = styled.a`
     color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
   }
-`;
+`
 
 const Row = styled.div`
   display: flex;
@@ -60,7 +61,7 @@ const Row = styled.div`
   svg {
     flex-shrink: 0;
   }
-`;
+`
 
 const Rating = styled.span`
   display: inline-flex;
@@ -77,30 +78,31 @@ const Rating = styled.span`
     color: ${({ theme }) => theme.colors.muted};
     margin-left: 4px;
   }
-`;
+`
 
 const Status = styled.span<{ $open: boolean }>`
   font-size: 12.5px;
   font-weight: 600;
-  color: ${({ $open, theme }) => ($open ? theme.colors.success : theme.colors.danger)};
+  color: ${({ $open, theme }) =>
+    $open ? theme.colors.success : theme.colors.danger};
   display: inline-flex;
   align-items: center;
   gap: 6px;
   &::before {
-    content: "";
+    content: '';
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: currentColor;
   }
-`;
+`
 
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 6px;
-`;
+`
 
 const Tag = styled.span`
   font-size: 12px;
@@ -108,20 +110,20 @@ const Tag = styled.span`
   color: ${({ theme }) => theme.colors.primaryDark};
   padding: 3px 10px;
   border-radius: ${({ theme }) => theme.radii.pill};
-`;
+`
 
 const TopLine = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-`;
+`
 
 type Props = {
-  company: Company;
-  highlighted?: boolean;
-  onHover?: (id: string | null) => void;
-};
+  company: Company
+  highlighted?: boolean
+  onHover?: (id: string | null) => void
+}
 
 export function CompanyCard({ company, highlighted, onHover }: Props) {
   return (
@@ -146,12 +148,14 @@ export function CompanyCard({ company, highlighted, onHover }: Props) {
         <Row>
           <Clock size={14} /> {company.hours}
           <span style={{ marginLeft: 8 }}>
-            <Status $open={company.isOpenNow}>{company.isOpenNow ? "Открыто" : "Закрыто"}</Status>
+            <Status $open={company.isOpenNow}>
+              {company.isOpenNow ? 'Открыто' : 'Закрыто'}
+            </Status>
           </span>
         </Row>
         {company.priceFrom && (
-          <Row style={{ color: "inherit" }}>
-            <strong>от {company.priceFrom.toLocaleString("ru-RU")} ₽</strong>
+          <Row style={{ color: 'inherit' }}>
+            <strong>от {company.priceFrom.toLocaleString('ru-RU')} ₽</strong>
           </Row>
         )}
         <Tags>
@@ -161,5 +165,5 @@ export function CompanyCard({ company, highlighted, onHover }: Props) {
         </Tags>
       </Body>
     </Card>
-  );
+  )
 }

@@ -1,26 +1,26 @@
-import { createFileRoute } from "@tanstack/react-router";
-import styled from "styled-components";
-import { useMemo, useState } from "react";
-import { Header } from "../components/layout/Header";
-import { ClientOnly } from "../components/ClientOnly";
-import { CompaniesMap } from "../components/map/CompaniesMap";
-import { CompanyCard } from "../components/catalog/CompanyCard";
-import { companies as ALL } from "../data/companies";
-import { Search } from "lucide-react";
+import { createFileRoute } from '@tanstack/react-router'
+import styled from 'styled-components'
+import { useMemo, useState } from 'react'
+import { Header } from '../components/layout/Header'
+import { ClientOnly } from '../components/ClientOnly'
+import { CompaniesMap } from '../components/map/CompaniesMap'
+import { CompanyCard } from '../components/catalog/CompanyCard'
+import { companies as ALL } from '../data/companies'
+import { Search } from 'lucide-react'
 
-export const Route = createFileRoute("/map")({
+export const Route = createFileRoute('/map')({
   head: () => ({
     meta: [
-      { title: "Карта бань и саун — Городские бани" },
+      { title: 'Карта бань и саун — Городские бани' },
       {
-        name: "description",
+        name: 'description',
         content:
-          "Интерактивная карта общественных бань и саун России. Найдите ближайшее заведение.",
+          'Интерактивная карта общественных бань и саун России. Найдите ближайшее заведение.',
       },
     ],
   }),
   component: MapPage,
-});
+})
 
 const Wrap = styled.div`
   display: grid;
@@ -29,7 +29,7 @@ const Wrap = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     grid-template-columns: 380px 1fr;
   }
-`;
+`
 
 const Sidebar = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.border};
@@ -40,7 +40,7 @@ const Sidebar = styled.aside`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     max-height: none;
   }
-`;
+`
 
 const SearchBox = styled.div`
   padding: 16px;
@@ -66,7 +66,7 @@ const SearchBox = styled.div`
     transform: translateY(-50%);
     color: ${({ theme }) => theme.colors.muted};
   }
-`;
+`
 
 const List = styled.div`
   overflow-y: auto;
@@ -74,7 +74,7 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
+`
 
 const MapPane = styled.div`
   position: relative;
@@ -83,22 +83,22 @@ const MapPane = styled.div`
     height: 100% !important;
     min-height: 400px;
   }
-`;
+`
 
 function MapPage() {
-  const [q, setQ] = useState("");
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [q, setQ] = useState('')
+  const [hovered, setHovered] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
-    if (!q.trim()) return ALL;
-    const lower = q.toLowerCase();
+    if (!q.trim()) return ALL
+    const lower = q.toLowerCase()
     return ALL.filter(
       (c) =>
         c.name.toLowerCase().includes(lower) ||
         c.city.toLowerCase().includes(lower) ||
         c.address.toLowerCase().includes(lower),
-    );
-  }, [q]);
+    )
+  }, [q])
 
   return (
     <>
@@ -123,18 +123,20 @@ function MapPage() {
               />
             ))}
             {filtered.length === 0 && (
-              <p style={{ padding: 20, color: "#64748b", textAlign: "center" }}>
+              <p style={{ padding: 20, color: '#64748b', textAlign: 'center' }}>
                 Ничего не найдено
               </p>
             )}
           </List>
         </Sidebar>
         <MapPane>
-          <ClientOnly fallback={<div style={{ height: "100%", background: "#f7f9fc" }} />}>
+          <ClientOnly
+            fallback={<div style={{ height: '100%', background: '#f7f9fc' }} />}
+          >
             <CompaniesMap companies={filtered} highlightedId={hovered} />
           </ClientOnly>
         </MapPane>
       </Wrap>
     </>
-  );
+  )
 }

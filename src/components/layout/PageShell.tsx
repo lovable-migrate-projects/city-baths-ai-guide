@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import type { ReactNode } from "react";
+import styled from 'styled-components'
+import { Header } from './Header'
+import { Footer } from './Footer'
+import type { ReactNode } from 'react'
 
 const Main = styled.main`
   min-height: calc(100vh - 200px);
-`;
+`
 
 const Hero = styled.section`
   background:
@@ -16,7 +16,7 @@ const Hero = styled.section`
     ),
     ${({ theme }) => theme.colors.bg};
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
+`
 
 const HeroInner = styled.div`
   max-width: ${({ theme }) => theme.container};
@@ -32,20 +32,20 @@ const HeroInner = styled.div`
     max-width: 720px;
     margin: 0;
   }
-`;
+`
 
 const Body = styled.div`
   max-width: ${({ theme }) => theme.container};
   margin: 0 auto;
   padding: 32px 20px 64px;
-`;
+`
 
 type Props = {
-  title: string;
-  subtitle?: string;
-  children: ReactNode;
-  fullWidth?: boolean;
-};
+  title: string
+  subtitle?: string
+  children: ReactNode
+  fullWidth?: boolean
+}
 
 export function PageShell({ title, subtitle, children, fullWidth }: Props) {
   return (
@@ -62,5 +62,5 @@ export function PageShell({ title, subtitle, children, fullWidth }: Props) {
       </Main>
       <Footer />
     </>
-  );
+  )
 }

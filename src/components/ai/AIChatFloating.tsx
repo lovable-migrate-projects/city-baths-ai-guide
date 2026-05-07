@@ -1,15 +1,15 @@
-import styled from "styled-components";
-import { useState } from "react";
-import { Sparkles, X } from "lucide-react";
-import { AIChatPanel } from "./AIChatPanel";
-import type { ChatMessage } from "../../types";
+import styled from 'styled-components'
+import { useState } from 'react'
+import { Sparkles, X } from 'lucide-react'
+import { AIChatPanel } from './AIChatPanel'
+import type { ChatMessage } from '../../types'
 
 type Props = {
-  messages: ChatMessage[];
-  isStreaming?: boolean;
-  onSend: (text: string) => void;
-  suggestions?: string[];
-};
+  messages: ChatMessage[]
+  isStreaming?: boolean
+  onSend: (text: string) => void
+  suggestions?: string[]
+}
 
 const Fab = styled.button`
   position: fixed;
@@ -34,7 +34,7 @@ const Fab = styled.button`
   &:hover {
     transform: translateY(-2px);
   }
-`;
+`
 
 const Backdrop = styled.div`
   position: fixed;
@@ -49,11 +49,12 @@ const Backdrop = styled.div`
     align-items: center;
     padding: 20px;
   }
-`;
+`
 
 const Panel = styled.div`
   background: white;
-  border-radius: ${({ theme }) => theme.radii.xl} ${({ theme }) => theme.radii.xl} 0 0;
+  border-radius: ${({ theme }) => theme.radii.xl}
+    ${({ theme }) => theme.radii.xl} 0 0;
   width: 100%;
   max-width: 560px;
   max-height: 90vh;
@@ -63,7 +64,7 @@ const Panel = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     border-radius: ${({ theme }) => theme.radii.xl};
   }
-`;
+`
 
 const Close = styled.button`
   position: absolute;
@@ -80,10 +81,10 @@ const Close = styled.button`
   &:hover {
     background: ${({ theme }) => theme.colors.surfaceAlt};
   }
-`;
+`
 
 export function AIChatFloating(props: Props) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   return (
     <>
       <Fab onClick={() => setOpen(true)} aria-label="Открыть ИИ-чат">
@@ -100,5 +101,5 @@ export function AIChatFloating(props: Props) {
         </Backdrop>
       )}
     </>
-  );
+  )
 }

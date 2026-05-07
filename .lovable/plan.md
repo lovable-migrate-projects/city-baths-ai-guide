@@ -93,18 +93,18 @@ Leaflet рендерим только на клиенте: компонент к
 
 ```ts
 type ChatMessage = {
-  id: string;
-  role: "user" | "assistant";
-  content: string; // markdown
-  companies?: Company[]; // если ответ содержит карточки
-};
+  id: string
+  role: 'user' | 'assistant'
+  content: string // markdown
+  companies?: Company[] // если ответ содержит карточки
+}
 
 type AIChatProps = {
-  messages: ChatMessage[];
-  isStreaming?: boolean;
-  onSend: (text: string) => void;
-  suggestions?: string[];
-};
+  messages: ChatMessage[]
+  isStreaming?: boolean
+  onSend: (text: string) => void
+  suggestions?: string[]
+}
 ```
 
 Внутри компонента — заглушка с демо-ответом для превью; вы подмените `onSend` на свой агент.

@@ -1,25 +1,39 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import styled from "styled-components";
-import { PageShell } from "../components/layout/PageShell";
-import { ClientOnly } from "../components/ClientOnly";
-import { CompaniesMap } from "../components/map/CompaniesMap";
-import { companies as ALL } from "../data/companies";
-import { reviews as ALL_REVIEWS } from "../data/reviews";
-import { Star, MapPin, Clock, Phone, Globe, ChevronLeft, CalendarDays } from "lucide-react";
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import styled from 'styled-components'
+import { PageShell } from '../components/layout/PageShell'
+import { ClientOnly } from '../components/ClientOnly'
+import { CompaniesMap } from '../components/map/CompaniesMap'
+import { companies as ALL } from '../data/companies'
+import { reviews as ALL_REVIEWS } from '../data/reviews'
+import {
+  Star,
+  MapPin,
+  Clock,
+  Phone,
+  Globe,
+  ChevronLeft,
+  CalendarDays,
+} from 'lucide-react'
 
-export const Route = createFileRoute("/companies/$id")({
+export const Route = createFileRoute('/companies/$id')({
   loader: ({ params }) => {
-    const company = ALL.find((c) => c.id === params.id);
-    if (!company) throw notFound();
-    return { company };
+    const company = ALL.find((c) => c.id === params.id)
+    if (!company) throw notFound()
+    return { company }
   },
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.company.name} — отзывы, фото, цены` },
           {
-            name: "description",
-            content: `${loaderData.company.name} в городе ${loaderData.company.city}. Адрес: ${loaderData.company.address}. Рейтинг ${loaderData.company.rating.toFixed(1)} на основе ${loaderData.company.reviewsCount} отзывов.`,
+            name: 'description',
+            content: `${loaderData.company.name} в городе ${
+              loaderData.company.city
+            }. Адрес: ${
+              loaderData.company.address
+            }. Рейтинг ${loaderData.company.rating.toFixed(1)} на основе ${
+              loaderData.company.reviewsCount
+            } отзывов.`,
           },
         ]
       : [],
@@ -38,7 +52,7 @@ export const Route = createFileRoute("/companies/$id")({
       <Link to="/">← Вернуться в каталог</Link>
     </PageShell>
   ),
-});
+})
 
 const Back = styled(Link)`
   display: inline-flex;
@@ -47,7 +61,7 @@ const Back = styled(Link)`
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 16px;
-`;
+`
 
 const Hero = styled.div`
   display: grid;
@@ -57,7 +71,7 @@ const Hero = styled.div`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     grid-template-columns: 1.3fr 1fr;
   }
-`;
+`
 
 const Cover = styled.div<{ $src: string }>`
   background-image: url(${({ $src }) => $src});
@@ -65,7 +79,7 @@ const Cover = styled.div<{ $src: string }>`
   background-position: center;
   border-radius: ${({ theme }) => theme.radii.lg};
   min-height: 280px;
-`;
+`
 
 const Info = styled.div`
   background: white;
@@ -79,7 +93,7 @@ const Info = styled.div`
     font-size: 26px;
     margin: 0;
   }
-`;
+`
 
 const RatingBig = styled.div`
   display: inline-flex;
@@ -101,7 +115,7 @@ const RatingBig = styled.div`
     font-weight: 400;
     font-family: ${({ theme }) => theme.fonts.body};
   }
-`;
+`
 
 const InfoRow = styled.div`
   display: flex;
@@ -113,13 +127,13 @@ const InfoRow = styled.div`
     color: ${({ theme }) => theme.colors.primary};
     flex-shrink: 0;
   }
-`;
+`
 
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-`;
+`
 
 const Tag = styled.span`
   font-size: 12.5px;
@@ -127,7 +141,7 @@ const Tag = styled.span`
   color: ${({ theme }) => theme.colors.primaryDark};
   padding: 4px 12px;
   border-radius: ${({ theme }) => theme.radii.pill};
-`;
+`
 
 const Btn = styled.a`
   margin-top: 6px;
@@ -141,7 +155,7 @@ const Btn = styled.a`
     background: ${({ theme }) => theme.colors.primaryDark};
     text-decoration: none;
   }
-`;
+`
 
 const Section = styled.section`
   margin-bottom: 28px;
@@ -149,7 +163,7 @@ const Section = styled.section`
     font-size: 22px;
     margin-bottom: 14px;
   }
-`;
+`
 
 const MapWrap = styled.div`
   height: 360px;
@@ -157,7 +171,7 @@ const MapWrap = styled.div`
     height: 100% !important;
     min-height: 360px;
   }
-`;
+`
 
 const ReviewCard = styled.article`
   background: white;
@@ -193,22 +207,25 @@ const ReviewCard = styled.article`
     color: ${({ theme }) => theme.colors.textSoft};
     font-size: 14.5px;
   }
-`;
+`
 
 function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString("ru-RU", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return new Date(iso).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
 }
 
 function CompanyPage() {
-  const { company } = Route.useLoaderData();
-  const companyReviews = ALL_REVIEWS.filter((r) => r.companyId === company.id);
+  const { company } = Route.useLoaderData()
+  const companyReviews = ALL_REVIEWS.filter((r) => r.companyId === company.id)
 
   return (
-    <PageShell title={company.name} subtitle={`${company.city}, ${company.address}`}>
+    <PageShell
+      title={company.name}
+      subtitle={`${company.city}, ${company.address}`}
+    >
       <Back to="/">
         <ChevronLeft size={16} /> К каталогу
       </Back>
@@ -226,8 +243,8 @@ function CompanyPage() {
             <MapPin size={16} /> {company.address}
           </InfoRow>
           <InfoRow>
-            <Clock size={16} /> {company.hours} ·{" "}
-            {company.isOpenNow ? "сейчас открыто" : "сейчас закрыто"}
+            <Clock size={16} /> {company.hours} ·{' '}
+            {company.isOpenNow ? 'сейчас открыто' : 'сейчас закрыто'}
           </InfoRow>
           <InfoRow>
             <Phone size={16} /> +7 (495) 000-00-00
@@ -237,8 +254,8 @@ function CompanyPage() {
           </InfoRow>
           {company.priceFrom && (
             <InfoRow>
-              <strong style={{ color: "inherit", fontSize: 18 }}>
-                от {company.priceFrom.toLocaleString("ru-RU")} ₽ / час
+              <strong style={{ color: 'inherit', fontSize: 18 }}>
+                от {company.priceFrom.toLocaleString('ru-RU')} ₽ / час
               </strong>
             </InfoRow>
           )}
@@ -255,7 +272,15 @@ function CompanyPage() {
         <h2>На карте</h2>
         <MapWrap>
           <ClientOnly
-            fallback={<div style={{ height: "100%", background: "#f7f9fc", borderRadius: 16 }} />}
+            fallback={
+              <div
+                style={{
+                  height: '100%',
+                  background: '#f7f9fc',
+                  borderRadius: 16,
+                }}
+              />
+            }
           >
             <CompaniesMap companies={[company]} />
           </ClientOnly>
@@ -265,7 +290,7 @@ function CompanyPage() {
       <Section>
         <h2>Отзывы ({companyReviews.length})</h2>
         {companyReviews.length === 0 ? (
-          <p style={{ color: "#64748b" }}>Пока нет отзывов. Будьте первым!</p>
+          <p style={{ color: '#64748b' }}>Пока нет отзывов. Будьте первым!</p>
         ) : (
           companyReviews.map((r) => (
             <ReviewCard key={r.id}>
@@ -278,7 +303,11 @@ function CompanyPage() {
                 </div>
                 <div className="stars">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={15} fill={i < r.rating ? "currentColor" : "none"} />
+                    <Star
+                      key={i}
+                      size={15}
+                      fill={i < r.rating ? 'currentColor' : 'none'}
+                    />
                   ))}
                 </div>
               </div>
@@ -288,5 +317,5 @@ function CompanyPage() {
         )}
       </Section>
     </PageShell>
-  );
+  )
 }

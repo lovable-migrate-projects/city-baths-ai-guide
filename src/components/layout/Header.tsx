@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Link as DefaultLink } from "@tanstack/react-router";
+import styled, { css } from 'styled-components'
+import { Link as DefaultLink } from '@tanstack/react-router'
 import {
   Flame,
   Menu,
@@ -10,53 +10,59 @@ import {
   Info,
   Building2,
   type LucideIcon,
-} from "lucide-react";
-import { useCallback, useEffect, useState, type ComponentType, type ReactNode } from "react";
+} from 'lucide-react'
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type ComponentType,
+  type ReactNode,
+} from 'react'
 
 type LinkLikeProps = {
-  to: string;
-  className?: string;
-  children?: ReactNode;
-  onClick?: () => void;
-};
+  to: string
+  className?: string
+  children?: ReactNode
+  onClick?: () => void
+}
 
 export type HeaderNavItem = {
-  href: string;
-  label: string;
-  icon?: LucideIcon;
-};
+  href: string
+  label: string
+  icon?: LucideIcon
+}
 
 export type HeaderProps = {
   /** Компонент-ссылка (по умолчанию — Link из @tanstack/react-router). */
-  LinkComponent?: ComponentType<LinkLikeProps>;
+  LinkComponent?: ComponentType<LinkLikeProps>
   /** Элементы навигации. */
-  navItems?: ReadonlyArray<HeaderNavItem>;
+  navItems?: ReadonlyArray<HeaderNavItem>
   /** Подпись бренда. */
-  brandLabel?: ReactNode;
+  brandLabel?: ReactNode
   /** Адрес бренд-ссылки. */
-  brandTo?: string;
+  brandTo?: string
   /** Подпись CTA-кнопки. */
-  ctaLabel?: ReactNode;
+  ctaLabel?: ReactNode
   /** Адрес CTA. */
-  ctaTo?: string;
+  ctaTo?: string
   /** Заголовок мобильного меню. */
-  mobileMenuTitle?: ReactNode;
+  mobileMenuTitle?: ReactNode
   /** Подсказка под CTA в мобильном меню. */
-  mobileCtaHint?: ReactNode;
-};
+  mobileCtaHint?: ReactNode
+}
 
 const Bar = styled.header`
   position: sticky;
   top: 0;
   z-index: 50;
   background: ${({ theme }) => {
-    console.log("styled.header theme", theme);
+    console.log('styled.header theme', theme)
 
-    return theme.colors.bg;
+    return theme.colors.bg
   }}cc;
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
+`
 
 const Inner = styled.div`
   max-width: ${({ theme }) => theme.container};
@@ -66,7 +72,7 @@ const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-`;
+`
 
 const Brand = styled(DefaultLink)`
   display: flex;
@@ -80,7 +86,7 @@ const Brand = styled(DefaultLink)`
   &:hover {
     text-decoration: none;
   }
-`;
+`
 
 const Logo = styled.span`
   width: 36px;
@@ -95,7 +101,7 @@ const Logo = styled.span`
   display: grid;
   place-items: center;
   box-shadow: ${({ theme }) => theme.shadows.glow};
-`;
+`
 
 const Nav = styled.nav`
   display: none;
@@ -112,13 +118,13 @@ const Nav = styled.nav`
       text-decoration: none;
     }
   }
-`;
+`
 
 const Right = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
+`
 
 const CTA = styled(DefaultLink)`
   display: none;
@@ -135,7 +141,7 @@ const CTA = styled(DefaultLink)`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     display: inline-flex;
   }
-`;
+`
 
 const Burger = styled.button`
   display: inline-flex;
@@ -159,7 +165,7 @@ const Burger = styled.button`
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     display: none;
   }
-`;
+`
 
 const Backdrop = styled.div<{ $open: boolean }>`
   position: fixed;
@@ -168,12 +174,12 @@ const Backdrop = styled.div<{ $open: boolean }>`
   backdrop-filter: blur(2px);
   z-index: 60;
   opacity: ${({ $open }) => ($open ? 1 : 0)};
-  pointer-events: ${({ $open }) => ($open ? "auto" : "none")};
+  pointer-events: ${({ $open }) => ($open ? 'auto' : 'none')};
   transition: opacity 0.2s ease;
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     display: none;
   }
-`;
+`
 
 const Drawer = styled.aside<{ $open: boolean }>`
   position: fixed;
@@ -184,14 +190,14 @@ const Drawer = styled.aside<{ $open: boolean }>`
   background: ${({ theme }) => theme.colors.bg};
   z-index: 70;
   box-shadow: -10px 0 40px rgba(15, 23, 42, 0.18);
-  transform: translateX(${({ $open }) => ($open ? "0" : "100%")});
+  transform: translateX(${({ $open }) => ($open ? '0' : '100%')});
   transition: transform 0.28s cubic-bezier(0.32, 0.72, 0.24, 1);
   display: flex;
   flex-direction: column;
   @media (min-width: ${({ theme }) => theme.bp.md}) {
     display: none;
   }
-`;
+`
 
 const DrawerHead = styled.div`
   display: flex;
@@ -199,7 +205,7 @@ const DrawerHead = styled.div`
   justify-content: space-between;
   padding: 16px 18px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-`;
+`
 
 const DrawerTitle = styled.div`
   display: flex;
@@ -209,7 +215,7 @@ const DrawerTitle = styled.div`
   font-weight: 800;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.text};
-`;
+`
 
 const linkBase = css`
   display: flex;
@@ -233,7 +239,7 @@ const linkBase = css`
     color: ${({ theme }) => theme.colors.primary};
     flex-shrink: 0;
   }
-`;
+`
 
 const NavList = styled.nav`
   display: flex;
@@ -246,7 +252,7 @@ const NavList = styled.nav`
   a {
     ${linkBase}
   }
-`;
+`
 
 const DrawerFoot = styled.div`
   padding: 16px 18px 22px;
@@ -254,7 +260,7 @@ const DrawerFoot = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
+`
 
 const DrawerCTA = styled(DefaultLink)`
   display: inline-flex;
@@ -271,14 +277,14 @@ const DrawerCTA = styled(DefaultLink)`
     background: ${({ theme }) => theme.colors.primaryDark};
     text-decoration: none;
   }
-`;
+`
 
 const Hint = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.muted};
   text-align: center;
   margin: 0;
-`;
+`
 
 const IconBtn = styled.button`
   background: transparent;
@@ -294,52 +300,52 @@ const IconBtn = styled.button`
     background: ${({ theme }) => theme.colors.surface};
     color: ${({ theme }) => theme.colors.text};
   }
-`;
+`
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const DEFAULT_HEADER_NAV_ITEMS: ReadonlyArray<HeaderNavItem> = [
-  { href: "/", label: "Каталог", icon: Building2 },
-  { href: "/map", label: "Карта", icon: MapPin },
-  { href: "/bani-otzivy", label: "Отзывы", icon: MessageSquare },
-  { href: "/ratings", label: "Рейтинги", icon: Star },
-  { href: "/about", label: "О нас", icon: Info },
-];
+  { href: '/', label: 'Каталог', icon: Building2 },
+  { href: '/map', label: 'Карта', icon: MapPin },
+  { href: '/bani-otzivy', label: 'Отзывы', icon: MessageSquare },
+  { href: '/ratings', label: 'Рейтинги', icon: Star },
+  { href: '/about', label: 'О нас', icon: Info },
+]
 
-const DefaultLinkAsLike = DefaultLink as unknown as ComponentType<LinkLikeProps>;
+const DefaultLinkAsLike = DefaultLink as unknown as ComponentType<LinkLikeProps>
 
 export function Header({
   LinkComponent = DefaultLinkAsLike,
   navItems = DEFAULT_HEADER_NAV_ITEMS,
-  brandLabel = "Городские бани",
-  brandTo = "/",
-  ctaLabel = "Разместить заведение",
-  ctaTo = "/companies/create",
-  mobileMenuTitle = "Меню",
-  mobileCtaHint = "Бесплатное размещение и продвижение",
+  brandLabel = 'Городские бани',
+  brandTo = '/',
+  ctaLabel = 'Разместить заведение',
+  ctaTo = '/companies/create',
+  mobileMenuTitle = 'Меню',
+  mobileCtaHint = 'Бесплатное размещение и продвижение',
 }: HeaderProps = {}) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const toggleOpen = useCallback(() => {
-    setOpen((v) => !v);
-  }, []);
+    setOpen((v) => !v)
+  }, [])
 
   const closeMenu = useCallback(() => {
-    setOpen(false);
-  }, []);
+    setOpen(false)
+  }, [])
 
   useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open])
 
   return (
     <>
@@ -364,7 +370,7 @@ export function Header({
             </CTA>
             <Burger
               type="button"
-              aria-label={open ? "Закрыть меню" : "Открыть меню"}
+              aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
               aria-expanded={open}
               aria-controls="mobile-nav"
               onClick={toggleOpen}
@@ -413,5 +419,5 @@ export function Header({
         </DrawerFoot>
       </Drawer>
     </>
-  );
+  )
 }

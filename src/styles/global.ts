@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after { box-sizing: border-box; }
@@ -24,4 +24,4 @@ export const GlobalStyle = createGlobalStyle`
   button { font-family: inherit; cursor: pointer; }
   img { max-width: 100%; display: block; }
   ul { padding: 0; margin: 0; list-style: none; }
-`;
+`
