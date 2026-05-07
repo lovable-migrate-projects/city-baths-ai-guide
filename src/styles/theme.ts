@@ -1,3 +1,15 @@
+const breakpoints = {
+  xs: 480,
+  sm: 768,
+  md: 992,
+  lg: 1200,
+  xl: 1920,
+};
+
+const background = {
+  default: "#dcdcdc",
+};
+
 export const theme = {
   colors: {
     primary: "#1976d2",
@@ -16,6 +28,10 @@ export const theme = {
     success: "#16a34a",
     danger: "#dc2626",
     white: "#ffffff",
+    a: {
+      default: "#2196f3",
+      hover: "#0d47a1",
+    },
   },
   radii: {
     sm: "8px",
@@ -41,6 +57,10 @@ export const theme = {
     body: `"Inter", system-ui, -apple-system, sans-serif`,
   },
   container: "1200px",
+  breakpoints,
+  background,
 } as const;
+
+export const lovableTheme = theme;
 
 export type AppTheme = typeof theme;

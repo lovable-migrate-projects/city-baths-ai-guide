@@ -1,13 +1,59 @@
 import styled, { css } from "styled-components";
-import { Link } from "@tanstack/react-router";
-import { Flame, Menu, X, MapPin, MessageSquare, Star, Info, Building2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Link as DefaultLink } from "@tanstack/react-router";
+import {
+  Flame,
+  Menu,
+  X,
+  MapPin,
+  MessageSquare,
+  Star,
+  Info,
+  Building2,
+  type LucideIcon,
+} from "lucide-react";
+import { useCallback, useEffect, useState, type ComponentType, type ReactNode } from "react";
+
+type LinkLikeProps = {
+  to: string;
+  className?: string;
+  children?: ReactNode;
+  onClick?: () => void;
+};
+
+export type HeaderNavItem = {
+  href: string;
+  label: string;
+  icon?: LucideIcon;
+};
+
+export type HeaderProps = {
+  /** Компонент-ссылка (по умолчанию — Link из @tanstack/react-router). */
+  LinkComponent?: ComponentType<LinkLikeProps>;
+  /** Элементы навигации. */
+  navItems?: ReadonlyArray<HeaderNavItem>;
+  /** Подпись бренда. */
+  brandLabel?: ReactNode;
+  /** Адрес бренд-ссылки. */
+  brandTo?: string;
+  /** Подпись CTA-кнопки. */
+  ctaLabel?: ReactNode;
+  /** Адрес CTA. */
+  ctaTo?: string;
+  /** Заголовок мобильного меню. */
+  mobileMenuTitle?: ReactNode;
+  /** Подсказка под CTA в мобильном меню. */
+  mobileCtaHint?: ReactNode;
+};
 
 const Bar = styled.header`
   position: sticky;
   top: 0;
   z-index: 50;
-  background: ${({ theme }) => theme.colors.bg}cc;
+  background: ${({ theme }) => {
+    console.log("styled.header theme", theme);
+
+    return theme.colors.bg;
+  }}cc;
   backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
@@ -22,7 +68,7 @@ const Inner = styled.div`
   gap: 16px;
 `;
 
-const Brand = styled(Link)`
+const Brand = styled(DefaultLink)`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -74,7 +120,7 @@ const Right = styled.div`
   gap: 10px;
 `;
 
-const CTA = styled(Link)`
+const CTA = styled(DefaultLink)`
   display: none;
   background: ${({ theme }) => theme.colors.primary};
   color: white;
@@ -210,7 +256,7 @@ const DrawerFoot = styled.div`
   gap: 10px;
 `;
 
-const DrawerCTA = styled(Link)`
+const DrawerCTA = styled(DefaultLink)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -250,16 +296,36 @@ const IconBtn = styled.button`
   }
 `;
 
-const NAV_ITEMS = [
+// eslint-disable-next-line react-refresh/only-export-components
+export const DEFAULT_HEADER_NAV_ITEMS: ReadonlyArray<HeaderNavItem> = [
   { href: "/", label: "Каталог", icon: Building2 },
   { href: "/map", label: "Карта", icon: MapPin },
   { href: "/bani-otzivy", label: "Отзывы", icon: MessageSquare },
   { href: "/ratings", label: "Рейтинги", icon: Star },
   { href: "/about", label: "О нас", icon: Info },
-] as const;
+];
 
-export function Header() {
+const DefaultLinkAsLike = DefaultLink as unknown as ComponentType<LinkLikeProps>;
+
+export function Header({
+  LinkComponent = DefaultLinkAsLike,
+  navItems = DEFAULT_HEADER_NAV_ITEMS,
+  brandLabel = "Городские бани",
+  brandTo = "/",
+  ctaLabel = "Разместить заведение",
+  ctaTo = "/companies/create",
+  mobileMenuTitle = "Меню",
+  mobileCtaHint = "Бесплатное размещение и продвижение",
+}: HeaderProps = {}) {
   const [open, setOpen] = useState(false);
+
+  const toggleOpen = useCallback(() => {
+    setOpen((v) => !v);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -279,27 +345,29 @@ export function Header() {
     <>
       <Bar>
         <Inner>
-          <Brand to="/">
+          <Brand as={LinkComponent} to={brandTo}>
             <Logo>
               <Flame size={20} />
             </Logo>
-            Городские бани
+            {brandLabel}
           </Brand>
           <Nav>
-            <Link to="/">Каталог</Link>
-            <Link to="/map">Карта</Link>
-            <Link to="/bani-otzivy">Отзывы</Link>
-            <Link to="/ratings">Рейтинги</Link>
-            <Link to="/about">О нас</Link>
+            {navItems.map(({ href, label }) => (
+              <LinkComponent key={href} to={href}>
+                {label}
+              </LinkComponent>
+            ))}
           </Nav>
           <Right>
-            <CTA to="/companies/create">Разместить заведение</CTA>
+            <CTA as={LinkComponent} to={ctaTo}>
+              {ctaLabel}
+            </CTA>
             <Burger
               type="button"
               aria-label={open ? "Закрыть меню" : "Открыть меню"}
               aria-expanded={open}
               aria-controls="mobile-nav"
-              onClick={() => setOpen((v) => !v)}
+              onClick={toggleOpen}
             >
               {open ? <X size={22} /> : <Menu size={22} />}
             </Burger>
@@ -307,7 +375,7 @@ export function Header() {
         </Inner>
       </Bar>
 
-      <Backdrop $open={open} onClick={() => setOpen(false)} aria-hidden="true" />
+      <Backdrop $open={open} onClick={closeMenu} aria-hidden="true" />
 
       <Drawer
         id="mobile-nav"
@@ -321,27 +389,27 @@ export function Header() {
             <Logo>
               <Flame size={18} />
             </Logo>
-            Меню
+            {mobileMenuTitle}
           </DrawerTitle>
-          <IconBtn type="button" aria-label="Закрыть меню" onClick={() => setOpen(false)}>
+          <IconBtn type="button" aria-label="Закрыть меню" onClick={closeMenu}>
             <X size={20} />
           </IconBtn>
         </DrawerHead>
 
         <NavList>
-          {NAV_ITEMS.map(({ href, label, icon: Icon }) => (
-            <Link key={href} to={href} onClick={() => setOpen(false)}>
-              <Icon size={18} />
+          {navItems.map(({ href, label, icon: Icon }) => (
+            <LinkComponent key={href} to={href} onClick={closeMenu}>
+              {Icon ? <Icon size={18} /> : null}
               {label}
-            </Link>
+            </LinkComponent>
           ))}
         </NavList>
 
         <DrawerFoot>
-          <DrawerCTA to="/companies/create" onClick={() => setOpen(false)}>
-            Разместить заведение
+          <DrawerCTA as={LinkComponent} to={ctaTo} onClick={closeMenu}>
+            {ctaLabel}
           </DrawerCTA>
-          <Hint>Бесплатное размещение и продвижение</Hint>
+          <Hint>{mobileCtaHint}</Hint>
         </DrawerFoot>
       </Drawer>
     </>
